@@ -46,7 +46,7 @@ export const themes = [
     },
     {
         id: 'sandstone',
-        name: 'سنگی',
+        name: 'کوهستان',
         primary: '#6f4e37',
         accent: '#f4a261',
         surface: '#fffaf3',
@@ -73,7 +73,7 @@ export const themes = [
     },
     {
         id: 'pastel',
-        name: 'پاستیل',
+        name: 'پاستل',
         primary: '#EFA7A7',
         accent: '#FFD972',
         surface: '#C7EAE4',
