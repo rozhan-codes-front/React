@@ -1,4 +1,5 @@
 import themes from './Themes';
+import templates from './Templates';
 
 export const fallbackCharges = [
     { item: 'هزینه مشاوره', amount: 120 },
@@ -9,15 +10,16 @@ export const fallbackCharges = [
 ];
 
 export const defaultConfig = {
-    companyName: 'فاکتور خرید اسنپ پی',
+    companyName: 'خرید اسنپ پی',
     invoiceNumber: 'INV-1045',
-    date: '23 آذر 1404',
+    date: '۴ آوریل ۲۰۲۴',
     paymentMethod: 'کارت اعتباری',
     charges: fallbackCharges,
-    initialThemeId: themes[4].id,
-    defaultAccent: themes[4].accent,
+    initialThemeId: themes[0].id,
+    defaultAccent: themes[0].accent,
+    initialTemplateId: templates[0].id,
     locale: 'fa-IR',
-    currencyLabel: 'تومان',
+    currencyLabel: 'دلار',
     enableDrag: true,
 };
 

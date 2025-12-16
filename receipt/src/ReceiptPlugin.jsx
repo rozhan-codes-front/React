@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import themes from './Themes';
 import { defaultConfig, fallbackCharges } from './config';
+import templates from './Templates';
 
 const toRgba = (color) => {
     if (!color) return [0, 0, 0, 1];
@@ -76,6 +77,7 @@ const ReceiptPlugin = ({
                            charges = fallbackCharges,
                            initialThemeId = defaultConfig.initialThemeId,
                            defaultAccent = defaultConfig.defaultAccent,
+                           initialTemplateId = defaultConfig.initialTemplateId,
                            locale = defaultConfig.locale,
                            currencyLabel = defaultConfig.currencyLabel,
                            enableDrag = defaultConfig.enableDrag,
@@ -83,6 +85,7 @@ const ReceiptPlugin = ({
     const [rows, setRows] = useState(charges);
     const [themeId, setThemeId] = useState(initialThemeId);
     const [customAccent, setCustomAccent] = useState(defaultAccent);
+    const [templateId, setTemplateId] = useState(initialTemplateId);
     const [dragIndex, setDragIndex] = useState(null);
 
     useEffect(() => {
@@ -168,6 +171,24 @@ const ReceiptPlugin = ({
         <main className="page">
             <section className="controls" aria-label="گزینه‌های شخصی‌سازی">
                 <div className="control">
+                    <label htmlFor="template">طرح رسید</label>
+                    <select
+                        id="template"
+                        value={templateId}
+                        onChange={(event) => setTemplateId(event.target.value)}
+                    >
+                        {templates.map((template) => (
+                            <option key={template.id} value={template.id}>
+                                {template.name}
+                            </option>
+                        ))}
+                    </select>
+                    <small className="control-hint">
+                        {templates.find((tpl) => tpl.id === templateId)?.description}
+                    </small>
+                </div>
+
+                <div className="control">
                     <label htmlFor="theme">رنگ‌بندی</label>
                     <select
                         id="theme"
@@ -183,18 +204,18 @@ const ReceiptPlugin = ({
                 </div>
 
                 <div className="control">
-                    <label htmlFor="accent">رنگ تم</label>
+                    <label htmlFor="accent">رنگ تأکید</label>
                     <input
                         id="accent"
                         type="color"
                         value={customAccent}
                         onChange={(event) => setCustomAccent(event.target.value)}
-                        aria-label="انتخاب رنگ تم رسید"
+                        aria-label="انتخاب رنگ تأکیدی رسید"
                     />
                 </div>
             </section>
 
-            <section className="receipt-card">
+            <section className={`receipt-card template-${templateId}`}>
                 <header>
                     <h1 className="company-name">{companyName}</h1>
                     <div className="meta" aria-label="اطلاعات فاکتور">
