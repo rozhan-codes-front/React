@@ -231,7 +231,7 @@ const ReceiptPlugin = ({
                 const hasLogo = Boolean(buyer?.logoUrl);
                 return (
                     <div className="logo-stack">
-                        <div className="logo-box" aria-label="لوگوی خریدار">
+                        <a href="#" className="logo-box" aria-label="لوگوی خریدار">
                             {hasLogo ? (
                                 <img src={buyer.logoUrl} alt="لوگوی خریدار" />
                             ) : (
@@ -240,11 +240,11 @@ const ReceiptPlugin = ({
                                     <small>در تنظیمات، آدرس تصویر لوگو را وارد کنید</small>
                                 </div>
                             )}
-                        </div>
-                        <div className="logo-text">
-                            <strong>{buyer?.name || 'نام خریدار'}</strong>
-                            <span>{buyer?.email || buyer?.phone || 'اطلاعات تماس'}</span>
-                        </div>
+                        </a>
+                        {/*<div className="logo-text">*/}
+                        {/*    <strong>{buyer?.name || 'نام خریدار'}</strong>*/}
+                        {/*    <span>{buyer?.email || buyer?.phone || 'اطلاعات تماس'}</span>*/}
+                        {/*</div>*/}
                     </div>
                 );
             }

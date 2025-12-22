@@ -55,7 +55,7 @@ export const defaultConfig = {
         phone: '۰۹۱۲۳۴۵۶۷۸۹',
         email: 'buyer@example.com',
         address: 'تهران، بلوار کشاورز، پلاک ۱۲۳، واحد ۷',
-        logoUrl: '',
+        logoUrl: 'https://snapppay.ir/wp-content/uploads/2025/04/logo-3.png',
     },
     sender: {
         name: 'اورورا شاپ',
