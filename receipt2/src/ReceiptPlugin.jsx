@@ -70,11 +70,11 @@ const pickContrastColor = (background, { light = '#fdfdfd', dark = '#0b1021', th
     relativeLuminance(background) > threshold ? dark : light;
 
 const sectionTitles = {
-    logo: 'لوگو خریدار',
+    logo: 'لوگو فروشنده',
     orderMeta: 'جزئیات سفارش',
     buyer: 'اطلاعات خریدار',
     sender: 'فرستنده',
-    receiver: 'گیرنده',
+    // receiver: 'گیرنده',
     items: 'محصولات خریداری‌شده',
     summary: 'یادداشت / توضیحات',
 };
@@ -88,7 +88,7 @@ const ReceiptPlugin = ({
                            shippingMethod,
                            buyer = {},
                            sender = {},
-                           receiver = {},
+                           // receiver = {},
                            items = fallbackItems,
                            orderTotals = {},
                            summaryNote = '',
@@ -256,10 +256,10 @@ const ReceiptPlugin = ({
                         {renderMetaLine('تاریخ سفارش', orderDate)}
                         {renderMetaLine('روش پرداخت', paymentMethod)}
                         {renderMetaLine('روش ارسال', shippingMethod)}
-                        {renderMetaLine('جمع محصولات', formatCurrency(totals.itemsTotal))}
-                        {renderMetaLine('هزینه ارسال', formatCurrency(totals.shipping))}
-                        {renderMetaLine('مالیات', formatCurrency(totals.tax))}
-                        {renderMetaLine('مبلغ نهایی', formatCurrency(totals.grand))}
+                        {/*{renderMetaLine('جمع محصولات', formatCurrency(totals.itemsTotal))}*/}
+                        {/*{renderMetaLine('هزینه ارسال', formatCurrency(totals.shipping))}*/}
+                        {/*{renderMetaLine('مالیات', formatCurrency(totals.tax))}*/}
+                        {/*{renderMetaLine('مبلغ نهایی', formatCurrency(totals.grand))}*/}
                     </div>
                 );
             case 'buyer':
@@ -280,14 +280,14 @@ const ReceiptPlugin = ({
                         <p className="address-line"><strong>آدرس:</strong> {sender?.address || '—'}</p>
                     </div>
                 );
-            case 'receiver':
-                return (
-                    <div className="info-block">
-                        <p><strong>نام گیرنده:</strong> {receiver?.name || '—'}</p>
-                        <p><strong>تلفن:</strong> {receiver?.phone || '—'}</p>
-                        <p className="address-line"><strong>آدرس:</strong> {receiver?.address || '—'}</p>
-                    </div>
-                );
+            // case 'receiver':
+            //     return (
+            //         <div className="info-block">
+            //             <p><strong>نام گیرنده:</strong> {receiver?.name || '—'}</p>
+            //             <p><strong>تلفن:</strong> {receiver?.phone || '—'}</p>
+            //             <p className="address-line"><strong>آدرس:</strong> {receiver?.address || '—'}</p>
+            //         </div>
+            //     );
             case 'items':
                 return (
                     <div className="table-wrapper">
@@ -422,25 +422,28 @@ const ReceiptPlugin = ({
 
                 <div className="receipt-body" aria-label="چیدمان یکپارچه رسید">
                     <div className="layout-grid">
-                        {sectionOrder.map((sectionId, index) => (
-                            <article
-                                key={sectionId}
-                                className={`panel panel-${sectionId} ${
-                                    sectionDragIndex === index ? 'dragging' : ''
-                                }`}
-                                draggable={enableDrag}
-                                onDragStart={() => handleSectionDragStart(index)}
-                                onDragOver={handleSectionDragOver}
-                                onDrop={() => handleSectionDrop(index)}
-                                aria-label={`بخش ${sectionTitles[sectionId]}`}
-                            >
-                                <div className="panel-head">
-                                    <span className="panel-title">{sectionTitles[sectionId]}</span>
-                                    {enableDrag && <span className="drag-hint" aria-hidden>⠿</span>}
-                                </div>
-                                {renderSectionContent(sectionId)}
-                            </article>
-                        ))}
+                        {sectionOrder.map((sectionId, index) => {
+                            const wide = sectionId === 'items' || sectionId === 'summary';
+                            return (
+                                <article
+                                    key={sectionId}
+                                    className={`panel panel-${sectionId} ${wide ? 'panel-wide' : ''} ${
+                                        sectionDragIndex === index ? 'dragging' : ''
+                                    }`}
+                                    draggable={enableDrag}
+                                    onDragStart={() => handleSectionDragStart(index)}
+                                    onDragOver={handleSectionDragOver}
+                                    onDrop={() => handleSectionDrop(index)}
+                                    aria-label={`بخش ${sectionTitles[sectionId]}`}
+                                >
+                                    <div className="panel-head">
+                                        <span className="panel-title">{sectionTitles[sectionId]}</span>
+                                        {enableDrag && <span className="drag-hint" aria-hidden>⠿</span>}
+                                    </div>
+                                    {renderSectionContent(sectionId)}
+                                </article>
+                            );
+                        })}
                     </div>
                 </div>
 

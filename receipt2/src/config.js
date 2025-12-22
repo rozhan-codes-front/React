@@ -43,7 +43,7 @@ export const fallbackItems = [
 ];
 
 export const defaultConfig = {
-    companyName: 'فروشگاه آنلاین اورورا',
+    companyName: 'اسنپ پی',
     orderNumber: 'ORD-10544',
     invoiceNumber: 'INV-10544',
     orderDate: '۱۴۰۳/۰۱/۱۵',
@@ -62,11 +62,11 @@ export const defaultConfig = {
         phone: '۰۲۱-۷۶۶۶۶۶۶',
         address: 'تهران، خیابان ولیعصر، برج تجارت، طبقه ۱۰',
     },
-    receiver: {
-        name: 'مرکز توزیع منطقه ۲',
-        phone: '۰۲۱-۴۴۴۴۴۴۴',
-        address: 'تهران، پونک، خیابان سردار جنگل، پلاک ۹۲',
-    },
+    // receiver: {
+    //     name: 'مرکز توزیع منطقه ۲',
+    //     phone: '۰۲۱-۴۴۴۴۴۴۴',
+    //     address: 'تهران، پونک، خیابان سردار جنگل، پلاک ۹۲',
+    // },
     summaryNote: 'این رسید برای خرید آنلاین صادر شده و شامل جزئیات سفارش، شیوه ارسال و اطلاعات هویتی خریدار است.',
     items: fallbackItems,
     orderTotals: {
@@ -78,7 +78,7 @@ export const defaultConfig = {
         'orderMeta',
         'buyer',
         'sender',
-        'receiver',
+        // 'receiver',
         'items',
         'summary',
     ],
@@ -86,7 +86,7 @@ export const defaultConfig = {
     defaultAccent: themes[0].accent,
     initialTemplateId: templates[0].id,
     locale: 'fa-IR',
-    currencyLabel: 'دلار',
+    currencyLabel: 'تومان',
     enableDrag: true,
 };
 
