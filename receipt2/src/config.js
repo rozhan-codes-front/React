@@ -43,11 +43,11 @@ export const fallbackItems = [
 ];
 
 export const defaultConfig = {
-    companyName: 'اسنپ پی',
+    companyName: 'نرم پا',
     orderNumber: 'ORD-10544',
     invoiceNumber: 'INV-10544',
     orderDate: '۱۴۰۳/۰۱/۱۵',
-    paymentMethod: 'پرداخت آنلاین',
+    paymentMethod: 'اسنپ پی',
     shippingMethod: 'ارسال سریع',
     buyer: {
         name: 'سحر رضایی',
@@ -57,10 +57,10 @@ export const defaultConfig = {
         address: 'تهران، بلوار کشاورز، پلاک ۱۲۳، واحد ۷',
     },
     sender: {
-        name: 'اسنپ پی',
+        name: 'نرم پا',
         phone: '۰۲۱-۷۶۶۶۶۶۶',
         address: 'تهران، خیابان ولیعصر، برج تجارت، طبقه ۱۰',
-        logoUrl: 'https://snapppay.ir/wp-content/uploads/2025/04/logo-3.png',
+        logoUrl: 'https://narmpa.com/wp-content/uploads/2024/10/narmpa-web.png',
     },
     // receiver: {
     //     name: 'مرکز توزیع منطقه ۲',
@@ -82,8 +82,8 @@ export const defaultConfig = {
         'items',
         'summary',
     ],
-    initialThemeId: themes[5].id,
-    defaultAccent: themes[5].accent,
+    initialThemeId: themes[0].id,
+    defaultAccent: themes[0].accent,
 
     initialTemplateId: templates[0].id,
 
