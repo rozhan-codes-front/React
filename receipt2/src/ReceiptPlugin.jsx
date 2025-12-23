@@ -228,12 +228,12 @@ const ReceiptPlugin = ({
     const renderSectionContent = (sectionId) => {
         switch (sectionId) {
             case 'logo': {
-                const hasLogo = Boolean(buyer?.logoUrl);
+                const hasLogo = Boolean(sender?.logoUrl);
                 return (
                     <div className="logo-stack">
                         <a href="#" className="logo-box" aria-label="لوگوی خریدار">
                             {hasLogo ? (
-                                <img src={buyer.logoUrl} alt="لوگوی خریدار" />
+                                <img src={sender.logoUrl} alt="لوگوی خریدار" />
                             ) : (
                                 <div className="logo-empty" role="presentation">
                                     <span>لوگو افزوده نشده</span>

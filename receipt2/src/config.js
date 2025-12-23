@@ -55,12 +55,12 @@ export const defaultConfig = {
         phone: '۰۹۱۲۳۴۵۶۷۸۹',
         email: 'buyer@example.com',
         address: 'تهران، بلوار کشاورز، پلاک ۱۲۳، واحد ۷',
-        logoUrl: 'https://snapppay.ir/wp-content/uploads/2025/04/logo-3.png',
     },
     sender: {
-        name: 'اورورا شاپ',
+        name: 'اسنپ پی',
         phone: '۰۲۱-۷۶۶۶۶۶۶',
         address: 'تهران، خیابان ولیعصر، برج تجارت، طبقه ۱۰',
+        logoUrl: 'https://snapppay.ir/wp-content/uploads/2025/04/logo-3.png',
     },
     // receiver: {
     //     name: 'مرکز توزیع منطقه ۲',
@@ -82,9 +82,11 @@ export const defaultConfig = {
         'items',
         'summary',
     ],
-    initialThemeId: themes[0].id,
-    defaultAccent: themes[0].accent,
+    initialThemeId: themes[5].id,
+    defaultAccent: themes[5].accent,
+
     initialTemplateId: templates[0].id,
+
     locale: 'fa-IR',
     currencyLabel: 'تومان',
     enableDrag: true,
