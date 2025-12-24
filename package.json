@@ -1,5 +1,34 @@
 {
   "dependencies": {
-    "react-router-dom": "^7.9.3"
+    "@studio-freight/lenis": "^1.0.42",
+    "gsap": "^3.14.2",
+    "react-router-dom": "^7.9.3",
+    "react-scroll-parallax": "^3.5.0",
+    "three": "^0.182.0"
+  },
+  "name": "react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rozhan-codes-front/React.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/rozhan-codes-front/React/issues"
+  },
+  "homepage": "https://github.com/rozhan-codes-front/React#readme",
+  "devDependencies": {
+    "vite": "^7.3.0"
   }
 }
