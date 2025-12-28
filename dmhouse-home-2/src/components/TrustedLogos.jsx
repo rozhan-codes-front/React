@@ -3,7 +3,14 @@ import React from 'react';
 export default function TrustedLogos() {
     return (
         <section className="trustedLogos">
-            <h2 className="trustedLogos__title">برندهایی که به ما اعتماد کرده‌اند</h2>
+            <header className="servicesStack__header">
+                <h2 className="servicesStack__title">
+                    همکاری ها
+                </h2>
+                <p className="servicesStack__subtitle">
+                    برندهایی که به ما اعتماد کرده اند
+                </p>
+            </header>
             <div className="logoStage">
                 <div className="logoStage__center">
                     <img src="https://dmhouse.agency/wp-content/uploads/2024/08/team1-min-min.png" alt="DMHouse" />

@@ -7,7 +7,7 @@
 }
 
 .footer-logo-img {
-    height: 50px; /* Footer logo usually slightly larger */
+    height: 50px;
     width: auto;
     object-fit: contain;
     display: block;
@@ -16,7 +16,7 @@
 }
 .site-footer {
     position: relative;
-    margin-top: 220px; /* Space for the floating card overlap */
+    margin-top: 220px;
     background: var(--navy);
     color: #fff;
     border-radius: 48px 48px 0 0;
@@ -233,7 +233,7 @@
         flex-direction: column-reverse;
         text-align: center;
         padding: 0;
-        top: -100px;
+        top: -215px;
     }
 
     .float-card-image {
@@ -262,5 +262,9 @@
 
     .footer-main {
         padding-top: 280px;
+    }
+
+    .float-card-image img {
+        object-fit: contain;
     }
 }
