@@ -1,0 +1,266 @@
+/* =========================
+   FOOTER STYLES
+========================= */
+/* Style for the footer logo */
+.footer-logo-wrapper {
+    margin-bottom: 20px;
+}
+
+.footer-logo-img {
+    height: 50px; /* Footer logo usually slightly larger */
+    width: auto;
+    object-fit: contain;
+    display: block;
+    /* Optional: Brightness filter if logo needs to stand out on dark bg */
+    /* filter: brightness(0) invert(1); */
+}
+.site-footer {
+    position: relative;
+    margin-top: 220px; /* Space for the floating card overlap */
+    background: var(--navy);
+    color: #fff;
+    border-radius: 48px 48px 0 0;
+    z-index: 10;
+}
+
+/* === 3D FLOATING CARD === */
+.footer-float-card {
+    position: absolute;
+    top: -237px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(1100px, 92vw);
+
+    background: linear-gradient(135deg, #ffffff, #f0f2f5);
+    border-radius: 36px;
+    padding: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    /* 3D Shadows */
+    box-shadow:
+            0 40px 100px -20px rgba(0,0,0,0.4),
+            0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.float-card-content {
+    flex: 1;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.float-text h3 {
+    color: var(--primary);
+    font-size: 32px;
+    margin: 0 0 8px;
+}
+
+.float-text p {
+    color: #7A7A7A;
+    margin: 0;
+    font-weight: 500;
+}
+
+.float-form {
+    display: flex;
+    gap: 12px;
+    background: #eef0f4;
+    padding: 8px;
+    border-radius: 16px;
+}
+
+.float-form input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 0 16px;
+    font-weight: 700;
+    color: var(--navy);
+    outline: none;
+}
+
+.float-btn {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.float-card-image {
+    width: 320px;
+    height: 380px;
+    border-radius: 28px;
+    overflow: hidden;
+    margin-right: 20px;
+    background: #eef0f4;
+}
+
+.float-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* === MAIN FOOTER CONTENT === */
+.footer-main {
+    padding-top: 200px; /* Internal padding to push content below float card */
+    padding-bottom: 40px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr 1.5fr;
+    gap: 60px;
+    margin-bottom: 80px;
+}
+
+/* Brand Column */
+.footer-logo {
+    font-size: 32px;
+    color: var(--primary);
+    margin: 0 0 20px;
+}
+
+.footer-desc {
+    opacity: 0.7;
+    line-height: 2;
+    margin-bottom: 32px;
+    max-width: 360px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 12px;
+}
+
+.social-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.social-btn:hover {
+    background: var(--primary);
+    transform: translateY(-3px);
+}
+
+/* Contact Column */
+.footer-contact-col {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.contact-pill {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 12px 16px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: 0.2s;
+}
+
+.contact-pill:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.cp-icon { font-size: 20px; }
+.cp-data { display: flex; flex-direction: column; }
+.cp-label { font-size: 11px; opacity: 0.5; }
+.cp-val { font-weight: 700; font-size: 14px; direction: ltr; text-align: right; }
+
+/* Links Columns */
+.footer-links-col {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.link-head {
+    color: var(--primary);
+    margin-bottom: 20px;
+}
+
+.link-group ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.link-group a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    transition: 0.2s;
+    font-size: 14px;
+}
+
+.link-group a:hover {
+    color: #fff;
+    padding-right: 5px;
+}
+
+/* Bottom Bar */
+.footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.1);
+    text-align: center;
+    padding-top: 30px;
+    opacity: 0.4;
+    font-size: 13px;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 992px) {
+    .footer-float-card {
+        width: 92vw;
+        flex-direction: column-reverse;
+        text-align: center;
+        padding: 0;
+        top: -100px;
+    }
+
+    .float-card-image {
+        width: 100%;
+        height: 200px;
+        margin: 0;
+        border-radius: 0 0 28px 28px;
+    }
+
+    .float-card-content {
+        padding: 32px 20px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .footer-links-col {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .site-footer {
+        margin-top: 160px;
+    }
+
+    .footer-main {
+        padding-top: 280px;
+    }
+}
