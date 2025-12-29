@@ -10,6 +10,7 @@ const SERVICES_DATA = [
         video: '/tech.mp4',
         tag: 'سرویس تخصصی',
         hoverTitle: 'سئو و رشد ارگانیک',
+        // hoverDesc removed from usage but kept in data if needed later
         hoverDesc: 'بهینه‌سازی ساختار سایت، تولید محتوای هدفمند و افزایش جایگاه در نتایج گوگل با تمرکز بر جذب لید و فروش واقعی.',
         features: ['تحلیل رقبا و کیورد ریسرچ', 'سئو تکنیکال و بهبود سرعت', 'استراتژی محتوای بلندمدت'],
         ctaPrimary: 'مشاهده جزئیات سرویس',
@@ -84,10 +85,7 @@ export default function ServicesSection() {
         const handleVideoPlay = () => {
             videos.forEach(video => {
                 video.muted = true;
-                video.play().catch(() => {
-                    // Autoplay blocked - waiting for interaction
-                });
-                // Retry on hover
+                video.play().catch(() => {});
                 video.closest('.serviceStackCard')?.addEventListener('mouseenter', () => video.play());
             });
         };
@@ -103,7 +101,6 @@ export default function ServicesSection() {
             cards.forEach((card, index) => {
                 const nextCard = cards[index + 1];
 
-                // Reset last card
                 if (!nextCard) {
                     card.style.transform = '';
                     card.style.opacity = '';
@@ -112,14 +109,11 @@ export default function ServicesSection() {
                 }
 
                 const nextRect = nextCard.getBoundingClientRect();
-
-                // Define trigger zone (bottom 10% to top 10% of viewport)
                 const triggerStart = viewportHeight * 0.9;
                 const triggerEnd = viewportHeight * 0.1;
 
                 let progress = 0;
 
-                // Calculate overlap progress
                 if (nextRect.top < triggerStart) {
                     progress = (triggerStart - nextRect.top) / (triggerStart - triggerEnd);
                     progress = Math.min(Math.max(progress, 0), 1);
@@ -127,8 +121,6 @@ export default function ServicesSection() {
 
                 if (progress > 0) {
                     const eased = easeOutCubic(progress);
-
-                    // The Effect: Slide up, Scale down, Fade out, Blur
                     const translateY = -eased * 48;
                     const scale = 1 - eased * 0.08;
                     const opacity = 1 - eased * 0.12;
@@ -149,7 +141,6 @@ export default function ServicesSection() {
 
         animId = requestAnimationFrame(updateStackScroll);
 
-        // Cleanup
         return () => {
             cancelAnimationFrame(animId);
         };
@@ -157,9 +148,11 @@ export default function ServicesSection() {
 
     return (
         <section id="services" className="servicesStack page-container" ref={containerRef}>
-            <header className="servicesStack__header">
-                <h2 className="servicesStack__title">خدمات ما</h2>
-                <p className="servicesStack__subtitle">
+            <header className="head">
+                <h2>
+                    <span className="highlight">خدمات</span> ما
+                </h2>
+                <p className="subtitle">
                     هر سرویس، یک مسیر مشخص برای رشد کسب‌وکار شما
                 </p>
             </header>
@@ -194,9 +187,7 @@ export default function ServicesSection() {
                                     {service.hoverTitle}
                                 </h4>
 
-                                <p className="serviceStackCard__hoverDesc">
-                                    {service.hoverDesc}
-                                </p>
+                                {/* REMOVED <p className="serviceStackCard__hoverDesc"> here */}
 
                                 <ul className="serviceStackCard__features">
                                     {service.features.map((feature, i) => (

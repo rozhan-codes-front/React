@@ -97,11 +97,11 @@ export default function OurTeam() {
 
     return (
         <section className="our-team-section-wrapper" >
-            <header className="servicesStack__header">
-                <h2 className="servicesStack__title">تیم ما</h2>
-                <p className="servicesStack__subtitle">
-                    هر سرویس، یک مسیر مشخص برای رشد کسب‌وکار شما
-                </p>
+            <header className="head">
+                <h2 className="ceo-heading">
+                    <span className="highlight">تیم</span> ما
+                </h2>
+                <p className="subtitle">هر سرویس، یک مسیر مشخص برای رشد کسب‌وکار شما</p>
             </header>
             <div className="our-team-section" ref={sectionRef}>
                 <div className="team-visual">

@@ -250,7 +250,6 @@
         /* Shorter image on mobile to save vertical space */
         height: 140px;
         margin: 0;
-        border-radius: 0 0 24px 24px;
     }
 
     .float-card-content {

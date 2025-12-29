@@ -31,6 +31,8 @@
     padding: 0;
     list-style: none;
     border-top: 1px solid rgba(0,0,0,0.12);
+    position: relative;
+    z-index: 5; /* Ensure list is above preview layer */
 }
 
 .why-us__item {
@@ -42,7 +44,8 @@
     cursor: pointer;
     border-bottom: 1px solid rgba(0,0,0,0.12);
     transition: color 0.25s ease;
-    z-index: 2;
+    z-index: 5; /* Items sit above the floating image */
+    background: transparent; /* Allows image to be seen if it slides under */
 }
 
 .why-us__item-header {
@@ -64,6 +67,8 @@
     line-height: 1.2;
     color: rgba(1,2,78,0.35);
     transition: color 0.25s ease;
+    position: relative;
+    z-index: 6; /* Text sits on top */
 }
 
 /* Hover effect only for desktop (via CSS default) */
@@ -85,6 +90,9 @@
     transition:
             opacity 0.25s ease,
             transform 0.25s cubic-bezier(.22,.61,.36,1);
+
+    position: relative;
+    z-index: 6; /* Text sits on top */
 }
 
 .why-us__item:hover .why-us__more {
@@ -105,7 +113,10 @@
     width: 320px;
     height: 220px;
     pointer-events: none;
-    z-index: 100; /* Ensure on top */
+
+    /* CHANGED: Lower z-index so it slides UNDER text */
+    z-index: 1;
+
     visibility: hidden;
     opacity: 0;
     will-change: transform, opacity;

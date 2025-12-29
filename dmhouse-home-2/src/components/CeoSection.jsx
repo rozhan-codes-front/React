@@ -33,7 +33,9 @@ export default function CeoSection() {
     return (
         <section id="ceoSection" className="ceo-section-wrapper" ref={wrapperRef}>
             <header className="head">
-                <h2 className="ceo-heading">الیاس علی‌پور</h2>
+                <h2 className="ceo-heading">
+                    <span className="highlight">الیاس</span> علی پور
+                </h2>
                 <p className="subtitle">مدیر کل مجموعه دی ام هاوس</p>
             </header>
 

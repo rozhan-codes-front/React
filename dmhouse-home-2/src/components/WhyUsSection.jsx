@@ -99,7 +99,7 @@ export default function WhyUsSection() {
     return (
         <section id="whyUs" className="why-us page-container">
             <header className="head">
-                <h2>چرا دی ام هاوس</h2>
+                <h2>چرا <span className="highlight">دی ام هاوس</span></h2>
                 <p className="subtitle">ارائه بهترین و به‌روزترین خدمات با ما</p>
             </header>
 

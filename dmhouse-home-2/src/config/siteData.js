@@ -107,7 +107,28 @@ export const HEADER_DATA = {
             id: 2,
             title: "خدمات طراحی سایت",
             href: "/web-design",
-            hasMegaMenu: false
+            hasMegaMenu: true,
+            columns: [
+                {
+                    title: "خدمات دیجیتال مارکتینگ",
+                    color: "#EF3E63",
+                    items: [
+                        { label: "گوگل ادز", href: "/google-ads", icon: "📈" },
+                        { label: "بازاریابی اینترنتی", href: "/internet-marketing", icon: "🌐" },
+                        { label: "راه اندازی کسب و کار", href: "/startup", icon: "🚀" },
+                        { label: "مشاوره دیجیتال مارکتینگ", href: "/consulting", icon: "💡" }
+                    ]
+                },
+                {
+                    title: "سوشال",
+                    color: "#2E2F7E",
+                    items: [
+                        { label: "سوشال مدیا", href: "/social-media", icon: "📱" },
+                        { label: "تولید محتوا اینستاگرام", href: "/content-creation", icon: "🎥" },
+                        { label: "مدیریت پیج اینستاگرام", href: "/instagram-management", icon: "❤️" }
+                    ]
+                }
+            ]
         },
         {
             id: 3,

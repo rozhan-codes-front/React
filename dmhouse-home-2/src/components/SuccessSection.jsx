@@ -95,9 +95,8 @@ export default function SuccessSection() {
     return (
         <section id="success" className="success-story page-container">
 
-            {/* STICKY HEADER */}
             <header className="success-sticky-head head">
-                <h2>داستان موفقیت</h2>
+                <h2>داستان <span className="highlight">موفقیت</span></h2>
                 <p className="subtitle">
                     داستان موفقیت ما از دیدگاه مشتریان
                 </p>

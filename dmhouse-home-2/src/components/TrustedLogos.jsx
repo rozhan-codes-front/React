@@ -32,11 +32,11 @@ export default function TrustedLogos() {
 
     return (
         <section className="trustedLogos">
-            <header className="servicesStack__header">
-                <h2 className="servicesStack__title">
-                    همکاری ها
+            <header className="head">
+                <h2>
+                    <span className="highlight">همکاری</span> ها
                 </h2>
-                <p className="servicesStack__subtitle">
+                <p className="subtitle">
                     برندهایی که به ما اعتماد کرده اند
                 </p>
             </header>

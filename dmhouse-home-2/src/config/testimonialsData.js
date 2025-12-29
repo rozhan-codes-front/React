@@ -35,5 +35,14 @@ export const TESTIMONIALS_DATA = [
         image: "/mardan.png", // Adjusted path for standard public folder usage
         logo: "https://dmhouse.agency/wp-content/uploads/2024/01/cropped-ieltsmix-fav-icon.png",
         cardColor: "#C3F0BB"
+    },
+    {
+        id: 5,
+        quote: "یک تیم کاملا کاربلد و با تجربه دور هم جمع شدن و این باعث شده کیفیت کار به طرز چشم‌گیری بهتر و مناسب‌تر از خروجی شرکت‌های مشابه باشه. در عرض این چند سال همکاری شرکت شما رو به چند نفر از دوستان معرفی کردم و اون‌ها هم رضایت کامل دارند. تسلط مدیران ارشد سازمان شما به علوم مدیریت و ارتقای سازمانی باعث شده که درک راحتی از خواسته‌ها و توقعات مشتری داشته باشید.",
+        name: "رضا چرخکار",
+        role: "مدیر IT شرکت فنی مهندسی JBH",
+        image: "https://dmhouse.agency/wp-content/uploads/2024/06/jbh-min.png",
+        logo: "https://dmhouse.agency/wp-content/uploads/2022/10/JBH.jpg",
+        cardColor: "#C3F0BB"
     }
 ];

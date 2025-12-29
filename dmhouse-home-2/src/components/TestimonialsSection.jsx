@@ -8,10 +8,15 @@ export default function TestimonialsSection() {
 
     const activeData = TESTIMONIALS_DATA.find(d => d.id === activeId) || TESTIMONIALS_DATA[0];
 
-    // Distribute data into 3 tracks
-    const track1 = [TESTIMONIALS_DATA[0], TESTIMONIALS_DATA[1], TESTIMONIALS_DATA[2], TESTIMONIALS_DATA[3]];
-    const track2 = [TESTIMONIALS_DATA[3], TESTIMONIALS_DATA[2], TESTIMONIALS_DATA[1], TESTIMONIALS_DATA[0]];
-    const track3 = [TESTIMONIALS_DATA[1], TESTIMONIALS_DATA[3], TESTIMONIALS_DATA[0], TESTIMONIALS_DATA[2]];
+    const track1 = TESTIMONIALS_DATA;
+
+    const track2 = [...TESTIMONIALS_DATA].reverse();
+
+    const midPoint = Math.floor(TESTIMONIALS_DATA.length / 2);
+    const track3 = [
+        ...TESTIMONIALS_DATA.slice(midPoint),
+        ...TESTIMONIALS_DATA.slice(0, midPoint)
+    ];
 
     useEffect(() => {
         if (isHovering) return;
@@ -37,6 +42,7 @@ export default function TestimonialsSection() {
     const renderTrack = (items, direction = 'normal') => (
         <div className={`logo-track-wrapper ${direction}`}>
             <div className="logo-track">
+                {/* We triple the list to ensure the infinite scroll has no gaps */}
                 {[...items, ...items, ...items].map((item, idx) => (
                     <div
                         key={`${item.id}-${idx}`}
@@ -64,7 +70,6 @@ export default function TestimonialsSection() {
                         className="t-display-card"
                         style={{ backgroundColor: activeData.cardColor }}
                     >
-                        {/* Wrapper div for flex content */}
                         <div className="t-card-content">
                             <div className="t-quote-icon">❝</div>
                             <p className="t-quote-text">{activeData.quote}</p>
