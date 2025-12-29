@@ -8,13 +8,14 @@ export default function Background3D() {
         // === CONFIGURATION ===
         const CONFIG = {
             colors: [0xEF3E63, 0x2E2F7E, 0x61CE70],
-            worldHeight: 80, // Taller world to prevent popping at edges
-            count: 55        // Number of thin wireframe objects
+            worldHeight: 80,
+            count: 45 // Slightly reduced count for less clutter
         };
 
         // === 1. SETUP ===
         const scene = new THREE.Scene();
-        // No Fog, so they stay crisp against the glass background
+        // We do NOT use fog here because it can mess with the transparency
+        // needed to see the GlassBackground behind this layer.
 
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 100);
         camera.position.z = 20;
@@ -36,21 +37,20 @@ export default function Background3D() {
         for (let i = 0; i < CONFIG.count; i++) {
             const material = new THREE.MeshBasicMaterial({
                 color: CONFIG.colors[Math.floor(Math.random() * CONFIG.colors.length)],
-                wireframe: true, // THIN LINES
+                wireframe: true,
                 transparent: true,
-                opacity: 0.6 // Visible against the glass
+                // MELLOW FACTOR 1: Drastically reduced opacity (Subtle lines)
+                opacity: 0.15
             });
 
             const mesh = new THREE.Mesh(geometry, material);
 
-            // Random Spread
             mesh.position.x = (Math.random() - 0.5) * 45;
             mesh.position.z = (Math.random() - 0.5) * 25;
 
-            // Random Scale
+            // Varied scales
             mesh.scale.setScalar(Math.random() * 0.8 + 0.3);
 
-            // Store initial random Y for infinite logic
             mesh.userData = {
                 rndY: Math.random() * CONFIG.worldHeight,
                 rotSpeed: (Math.random() - 0.5) * 0.02,
@@ -62,39 +62,31 @@ export default function Background3D() {
         }
         scene.add(particlesGroup);
 
-        // === 3. ROBUST INFINITE SCROLL LOOP ===
+        // === 3. INFINITE SCROLL LOOP ===
         const clock = new THREE.Clock();
         let animationId;
-
-        // Helper to handle modulo with negative numbers correctly
         const safeMod = (n, m) => ((n % m) + m) % m;
 
         const tick = () => {
             const elapsedTime = clock.getElapsedTime();
-
-            // Camera moves down as we scroll
             const scrollY = window.scrollY || 0;
-            camera.position.y = -(scrollY * 0.02);
+
+            // Slower parallax for a calmer feel
+            camera.position.y = -(scrollY * 0.015);
 
             particles.forEach(mesh => {
-                // Rotation & Bobbing
                 mesh.rotation.x += mesh.userData.rotSpeed;
                 mesh.rotation.y += mesh.userData.rotSpeed;
+
+                // Gentler bobbing
                 const floatY = Math.sin(elapsedTime + mesh.userData.yOffset) * 1.5;
 
-                // --- INFINITE MATH FIX ---
-                // 1. Calculate the distance between the object's "home" Y and the camera Y
                 const diff = mesh.userData.rndY - camera.position.y;
-
-                // 2. Wrap this distance within 0 to worldHeight
                 const wrappedDiff = safeMod(diff, CONFIG.worldHeight);
 
-                // 3. Position the object relative to the camera, centered
-                // This ensures the "box" of objects travels WITH the camera forever
                 mesh.position.y = camera.position.y + wrappedDiff - (CONFIG.worldHeight / 2) + floatY;
             });
 
-            // Slowly rotate the whole world for dynamism
             particlesGroup.rotation.y = elapsedTime * 0.05;
 
             renderer.render(scene, camera);
@@ -111,7 +103,6 @@ export default function Background3D() {
         };
         window.addEventListener('resize', handleResize);
 
-        // === 5. CLEANUP ===
         return () => {
             window.removeEventListener('resize', handleResize);
             cancelAnimationFrame(animationId);
@@ -123,18 +114,38 @@ export default function Background3D() {
 
     return (
         <div
-            ref={mountRef}
             style={{
                 position: 'fixed',
                 top: 0,
                 left: 0,
                 width: '100%',
                 height: '100%',
-                // Z-INDEX: 0 sits between Glass (-1) and Content (1)
                 zIndex: 0,
                 pointerEvents: 'none',
-                background: 'transparent'
             }}
-        />
+        >
+            {/* THE CANVAS CONTAINER */}
+            <div
+                ref={mountRef}
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    // MELLOW FACTOR 2: Blur the wireframes slightly to look like etched glass
+                    filter: 'blur(0.8px)',
+                    opacity: 1
+                }}
+            />
+
+            {/* THE GLASSY OVERLAY */}
+            {/* MELLOW FACTOR 3: A white wash layer to reduce contrast */}
+            <div
+                style={{
+                    position: 'absolute',
+                    inset: 0,
+                    background: 'rgba(255, 255, 255, 0.25)', // Adjust opacity to fade shapes more/less
+                    mixBlendMode: 'lighten'
+                }}
+            />
+        </div>
     );
 }

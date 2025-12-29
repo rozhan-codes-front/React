@@ -1,7 +1,7 @@
 /* =========================
    FOOTER STYLES
 ========================= */
-/* Style for the footer logo */
+
 .footer-logo-wrapper {
     margin-bottom: 20px;
 }
@@ -11,67 +11,72 @@
     width: auto;
     object-fit: contain;
     display: block;
-    /* Optional: Brightness filter if logo needs to stand out on dark bg */
-    /* filter: brightness(0) invert(1); */
 }
+
 .site-footer {
     position: relative;
-    margin-top: 220px;
+    /* Reduced top margin since card is smaller */
+    margin-top: 140px;
     background: var(--navy);
     color: #fff;
     border-radius: 48px 48px 0 0;
     z-index: 10;
 }
 
-/* === 3D FLOATING CARD === */
+/* === 3D FLOATING CARD (COMPACT VERSION) === */
 .footer-float-card {
     position: absolute;
-    top: -237px;
+    /* Adjusted top offset for smaller height */
+    top: -130px;
     left: 50%;
     transform: translateX(-50%);
-    width: min(1100px, 92vw);
+
+    /* MADE SMALLER: 1100px -> 850px */
+    width: min(850px, 92vw);
 
     background: linear-gradient(135deg, #ffffff, #f0f2f5);
-    border-radius: 36px;
-    padding: 12px;
+    border-radius: 24px; /* Slightly tighter radius */
+    padding: 10px; /* Inner border spacing */
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    /* 3D Shadows */
     box-shadow:
-            0 40px 100px -20px rgba(0,0,0,0.4),
-            0 10px 30px rgba(0,0,0,0.1);
+            0 30px 60px -15px rgba(0,0,0,0.3),
+            0 10px 20px rgba(0,0,0,0.05);
     border: 1px solid rgba(255,255,255,0.1);
 }
 
 .float-card-content {
     flex: 1;
-    padding: 48px;
+    /* MADE SMALLER: 48px -> 32px */
+    padding: 32px;
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
 }
 
 .float-text h3 {
     color: var(--primary);
-    font-size: 32px;
-    margin: 0 0 8px;
+    /* MADE SMALLER: 32px -> 26px */
+    font-size: 26px;
+    margin: 0 0 6px;
 }
 
 .float-text p {
     color: #7A7A7A;
     margin: 0;
     font-weight: 500;
+    font-size: 14px;
 }
 
 .float-form {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     background: #eef0f4;
-    padding: 8px;
-    border-radius: 16px;
+    padding: 6px;
+    border-radius: 12px;
 }
 
 .float-form input {
@@ -82,25 +87,30 @@
     font-weight: 700;
     color: var(--navy);
     outline: none;
+    font-size: 14px;
 }
 
 .float-btn {
     background: var(--primary);
     color: #fff;
     border: none;
-    padding: 14px 32px;
-    border-radius: 12px;
+    padding: 12px 24px;
+    border-radius: 10px;
     font-weight: 800;
     cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
 }
 
 .float-card-image {
-    width: 320px;
-    height: 380px;
-    border-radius: 28px;
+    /* MADE SMALLER: 320x380 -> 220x220 */
+    width: 220px;
+    height: 220px;
+    border-radius: 20px;
     overflow: hidden;
-    margin-right: 20px;
+    margin-right: 12px;
     background: #eef0f4;
+    flex-shrink: 0; /* Prevents squishing */
 }
 
 .float-card-image img {
@@ -111,40 +121,35 @@
 
 /* === MAIN FOOTER CONTENT === */
 .footer-main {
-    padding-top: 200px; /* Internal padding to push content below float card */
+    /* REDUCED: 200px -> 160px (Because card sticks out less) */
+    padding-top: 160px;
     padding-bottom: 40px;
 }
 
 .footer-grid {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr 1.5fr;
-    gap: 60px;
-    margin-bottom: 80px;
+    gap: 50px;
+    margin-bottom: 60px;
 }
 
 /* Brand Column */
-.footer-logo {
-    font-size: 32px;
-    color: var(--primary);
-    margin: 0 0 20px;
-}
+.footer-logo { font-size: 32px; color: var(--primary); margin: 0 0 20px; }
 
 .footer-desc {
     opacity: 0.7;
-    line-height: 2;
-    margin-bottom: 32px;
-    max-width: 360px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+    max-width: 320px;
+    font-size: 14px;
 }
 
-.footer-socials {
-    display: flex;
-    gap: 12px;
-}
+.footer-socials { display: flex; gap: 10px; }
 
 .social-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     background: rgba(255,255,255,0.08);
     display: flex;
     align-items: center;
@@ -161,39 +166,38 @@
 .footer-contact-col {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
 }
 
 .contact-pill {
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(255,255,255,0.06);
-    padding: 12px 16px;
-    border-radius: 16px;
+    padding: 10px 14px;
+    border-radius: 14px;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     transition: 0.2s;
 }
 
-.contact-pill:hover {
-    background: rgba(255,255,255,0.08);
-}
+.contact-pill:hover { background: rgba(255,255,255,0.08); }
 
-.cp-icon { font-size: 20px; }
+.cp-icon { font-size: 18px; }
 .cp-data { display: flex; flex-direction: column; }
-.cp-label { font-size: 11px; opacity: 0.5; }
-.cp-val { font-weight: 700; font-size: 14px; direction: ltr; text-align: right; }
+.cp-label { font-size: 10px; opacity: 0.5; }
+.cp-val { font-weight: 700; font-size: 13px; direction: ltr; text-align: right; }
 
 /* Links Columns */
 .footer-links-col {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    gap: 20px;
 }
 
 .link-head {
     color: var(--primary);
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    font-size: 15px;
 }
 
 .link-group ul {
@@ -202,14 +206,14 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 }
 
 .link-group a {
     color: rgba(255,255,255,0.7);
     text-decoration: none;
     transition: 0.2s;
-    font-size: 14px;
+    font-size: 13px;
 }
 
 .link-group a:hover {
@@ -221,30 +225,41 @@
 .footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.1);
     text-align: center;
-    padding-top: 30px;
+    padding-top: 24px;
     opacity: 0.4;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 /* === RESPONSIVE === */
 @media (max-width: 992px) {
+    .site-footer {
+        margin-top: 120px;
+    }
+
     .footer-float-card {
         width: 92vw;
-        flex-direction: column-reverse;
+        flex-direction: column-reverse; /* Stack: Image on bottom of card */
         text-align: center;
         padding: 0;
-        top: -215px;
+        /* Adjusted top offset for mobile stack */
+        top: -150px;
     }
 
     .float-card-image {
         width: 100%;
-        height: 200px;
+        /* Shorter image on mobile to save vertical space */
+        height: 140px;
         margin: 0;
-        border-radius: 0 0 28px 28px;
+        border-radius: 0 0 24px 24px;
     }
 
     .float-card-content {
-        padding: 32px 20px;
+        padding: 24px 20px;
+        gap: 16px;
+    }
+
+    .footer-main {
+        padding-top: 220px;
     }
 
     .footer-grid {
@@ -254,14 +269,6 @@
 
     .footer-links-col {
         grid-template-columns: 1fr 1fr;
-    }
-
-    .site-footer {
-        margin-top: 160px;
-    }
-
-    .footer-main {
-        padding-top: 280px;
     }
 
     .float-card-image img {

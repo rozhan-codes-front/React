@@ -63,3 +63,75 @@ export const SITE_DATA = {
         ]
     }
 };
+
+export const HEADER_DATA = {
+    brand: {
+        name: "DMHouse",
+        logoUrl: "https://dmhouse.agency/wp-content/uploads/2024/06/logo2-min.png",
+        homeLink: "/"
+    },
+    cta: {
+        title: "دریافت مشاوره",
+        href: "/consultation"
+    },
+    // MEGA MENU NAVIGATION STRUCTURE
+    navigation: [
+        {
+            id: 1,
+            title: "آژانس دیجیتال مارکتینگ",
+            href: "/digital-marketing",
+            hasMegaMenu: true,
+            columns: [
+                {
+                    title: "خدمات دیجیتال مارکتینگ",
+                    color: "#EF3E63",
+                    items: [
+                        { label: "گوگل ادز", href: "/google-ads", icon: "📈" },
+                        { label: "بازاریابی اینترنتی", href: "/internet-marketing", icon: "🌐" },
+                        { label: "راه اندازی کسب و کار", href: "/startup", icon: "🚀" },
+                        { label: "مشاوره دیجیتال مارکتینگ", href: "/consulting", icon: "💡" }
+                    ]
+                },
+                {
+                    title: "سوشال",
+                    color: "#2E2F7E",
+                    items: [
+                        { label: "سوشال مدیا", href: "/social-media", icon: "📱" },
+                        { label: "تولید محتوا اینستاگرام", href: "/content-creation", icon: "🎥" },
+                        { label: "مدیریت پیج اینستاگرام", href: "/instagram-management", icon: "❤️" }
+                    ]
+                }
+            ]
+        },
+        {
+            id: 2,
+            title: "خدمات طراحی سایت",
+            href: "/web-design",
+            hasMegaMenu: false
+        },
+        {
+            id: 3,
+            title: "خدمات سئو",
+            href: "/seo",
+            hasMegaMenu: false
+        },
+        {
+            id: 4,
+            title: "خدمات گرافیکی",
+            href: "/graphic-design",
+            hasMegaMenu: false
+        },
+        {
+            id: 5,
+            title: "ارتباط با ما",
+            href: "/contact",
+            hasMegaMenu: false
+        },
+        {
+            id: 6,
+            title: "دی ام هاوس مارکت",
+            href: "/market",
+            hasMegaMenu: false
+        }
+    ]
+};

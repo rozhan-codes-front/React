@@ -40,7 +40,7 @@ export default function CeoSection() {
             <div className="ceo-section">
                 <div className="ceo-bg">
                     <div className="ceo-bg__inner">
-                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2000&auto=format&fit=crop" alt="Elias Alipour" />
+                        <img src="https://dmhouse.agency/wp-content/uploads/2025/12/111.jpg" alt="Elias Alipour" />
                     </div>
                     <div className="ceo-overlay"></div>
                 </div>

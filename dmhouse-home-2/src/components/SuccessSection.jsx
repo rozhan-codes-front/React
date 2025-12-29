@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
+import '../styles/SuccessSection.css';
 
-// === DATA CONFIGURATION ===
-// Extracted from your HTML for easier management
 const SUCCESS_DATA = [
     {
         id: 1,
@@ -51,7 +50,7 @@ export default function SuccessSection() {
         setActiveIndex((prev) => (prev - 1 + SUCCESS_DATA.length) % SUCCESS_DATA.length);
     };
 
-    // Drag / Swipe Logic
+    // Touch/Swipe Logic
     useEffect(() => {
         const track = trackRef.current;
         if (!track) return;
@@ -61,7 +60,7 @@ export default function SuccessSection() {
         let deltaX = 0;
 
         const onDown = (e) => {
-            if (e.target.closest('button')) return; // Ignore buttons
+            if (e.target.closest('button')) return;
             startX = e.clientX;
             isDragging = true;
             track.style.cursor = 'grabbing';
@@ -77,8 +76,6 @@ export default function SuccessSection() {
             if (!isDragging) return;
             isDragging = false;
             track.style.cursor = 'grab';
-
-            // Swipe Threshold (80px)
             if (deltaX < -80) goNext();
             else if (deltaX > 80) goPrev();
             deltaX = 0;
@@ -97,87 +94,76 @@ export default function SuccessSection() {
 
     return (
         <section id="success" className="success-story page-container">
-            <header className="head">
+
+            {/* STICKY HEADER */}
+            <header className="success-sticky-head head">
                 <h2>داستان موفقیت</h2>
                 <p className="subtitle">
                     داستان موفقیت ما از دیدگاه مشتریان
                 </p>
             </header>
 
-            <div className="success-carousel">
-                <div className="success-cards" ref={trackRef}>
-                    {SUCCESS_DATA.map((card, index) => {
-                        // Determine Classes
-                        let className = 'success-card';
-                        if (index === activeIndex) className += ' is-active';
-                        else if (index === (activeIndex + 1) % SUCCESS_DATA.length) className += ' is-next';
+            {/* SCROLLING CAROUSEL CONTAINER (Covers the header) */}
+            <div className="success-carousel-wrapper">
+                <div className="success-carousel">
+                    <div className="success-cards" ref={trackRef}>
+                        {SUCCESS_DATA.map((card, index) => {
+                            // 3D Class Logic
+                            let className = 'success-card';
+                            if (index === activeIndex) className += ' is-active';
+                            else if (index === (activeIndex + 1) % SUCCESS_DATA.length) className += ' is-next';
 
-                        // Note: For 'is-exit' animations in React, you typically need
-                        // a 'prevIndex' ref to determine direction, but this base logic
-                        // covers the static and active states requested.
-
-                        return (
-                            <article key={card.id} className={className}>
-                                <div className="success-card__visual">
-                                    <img src={card.img} alt={card.title} />
-                                </div>
-
-                                <div className="success-card__content">
-                                    <div className="sc-header">
-                                        <span className="sc-badge">{card.badge}</span>
-                                        <h3 className="sc-title">{card.title}</h3>
+                            return (
+                                <article key={card.id} className={className}>
+                                    <div className="success-card__visual">
+                                        <img src={card.img} alt={card.title} />
                                     </div>
 
-                                    <div className="sc-hero-metric">
-                                        <div className={`sc-hero-val ${card.metric.colorClass}`}>
-                                            {card.metric.val}
-                                            <span className="sc-hero-unit">{card.metric.unit}</span>
+                                    <div className="success-card__content">
+                                        <div className="sc-header">
+                                            <span className="sc-badge">{card.badge}</span>
+                                            <h3 className="sc-title">{card.title}</h3>
                                         </div>
-                                        <p className="sc-hero-label">{card.metric.label}</p>
-                                    </div>
 
-                                    <div className="sc-grid">
-                                        {card.grid.map((item, i) => (
-                                            <div className="sc-box" key={i}>
-                                                <span className="sc-box-label">{item.label}</span>
-                                                <div className={`sc-box-val ${item.type}`}>
-                                                    {item.val}
-                                                </div>
+                                        <div className="sc-hero-metric">
+                                            <div className={`sc-hero-val ${card.metric.colorClass}`}>
+                                                {card.metric.val}
+                                                <span className="sc-hero-unit">{card.metric.unit}</span>
                                             </div>
-                                        ))}
+                                            <p className="sc-hero-label">{card.metric.label}</p>
+                                        </div>
+
+                                        <div className="sc-grid">
+                                            {card.grid.map((item, i) => (
+                                                <div className="sc-box" key={i}>
+                                                    <span className="sc-box-label">{item.label}</span>
+                                                    <div className={`sc-box-val ${item.type}`}>
+                                                        {item.val}
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
-                                </div>
-                            </article>
-                        );
-                    })}
-                </div>
+                                </article>
+                            );
+                        })}
+                    </div>
 
-                <div className="success-controls">
-                    <button
-                        className="success-btn success-btn--prev"
-                        aria-label="Previous Project"
-                        onClick={goPrev}
-                    >
-                        <span className="btn-icon">
-                            <img
-                                src="/svg/left.svg"
-                                alt=""
-                                width="25px"
-                                style={{ transform: 'rotate(180deg)' }}
-                            />
-                        </span>
-                    </button>
+                    {/* Navigation Buttons */}
+                    <div className="success-controls">
+                        <button className="success-btn success-btn--prev" aria-label="Previous" onClick={goPrev}>
+                            <span className="btn-icon">
+                                <img src="/svg/left.svg" alt="" width="25px" style={{ transform: 'rotate(180deg)' }} />
+                            </span>
+                        </button>
 
-                    <button
-                        className="success-btn success-btn--next"
-                        aria-label="Next Project"
-                        onClick={goNext}
-                    >
-                        <span className="btn-text">پروژه بعدی</span>
-                        <span className="btn-icon">
-                            <img src="/svg/left.svg" alt="" width="25px" />
-                        </span>
-                    </button>
+                        <button className="success-btn success-btn--next" aria-label="Next" onClick={goNext}>
+                            <span className="btn-text">پروژه بعدی</span>
+                            <span className="btn-icon">
+                                <img src="/svg/left.svg" alt="" width="25px" />
+                            </span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>

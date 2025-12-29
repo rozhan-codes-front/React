@@ -1,0 +1,182 @@
+/* =========================
+   WHY US (DESKTOP DEFAULT)
+========================= */
+
+.why-us {
+    padding: 180px 0;
+    position: relative;
+    z-index: 10;
+}
+
+.why-us__head {
+    width: min(1400px, 92vw);
+    margin: 0 auto 120px;
+}
+
+.why-us__head h2 {
+    font-size: clamp(48px, 6vw, 96px);
+    font-weight: 900;
+    margin: 0 0 16px;
+    color: #01024E;
+}
+
+.why-us__subtitle {
+    max-width: 420px;
+    line-height: 1.9;
+    color: rgba(1,2,78,0.7);
+}
+
+.why-us__list {
+    margin: 0 auto;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid rgba(0,0,0,0.12);
+}
+
+.why-us__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 56px 0;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+    transition: color 0.25s ease;
+    z-index: 2;
+}
+
+.why-us__item-header {
+    display: flex;
+    align-items: center;
+}
+
+.why-us__index {
+    font-size: 18px;
+    font-weight: 800;
+    color: rgba(1,2,78,0.35);
+    min-width: 32px;
+    padding-left: 40px;
+}
+
+.why-us__text {
+    font-size: clamp(28px, 4vw, 56px);
+    font-weight: 800;
+    line-height: 1.2;
+    color: rgba(1,2,78,0.35);
+    transition: color 0.25s ease;
+}
+
+/* Hover effect only for desktop (via CSS default) */
+.why-us__item:hover .why-us__text {
+    color: #01024E;
+}
+
+.why-us__more {
+    display: block;
+    margin-top: 18px;
+    max-width: 420px;
+    text-align: center;
+    font-size: 24px;
+    line-height: 1.9;
+    color: rgba(1,2,78,0.7);
+
+    opacity: 0; /* Hidden by default on Desktop */
+    transform: translateY(6px);
+    transition:
+            opacity 0.25s ease,
+            transform 0.25s cubic-bezier(.22,.61,.36,1);
+}
+
+.why-us__item:hover .why-us__more {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* DESKTOP: HIDE MOBILE IMAGE */
+.why-us__mobile-media {
+    display: none;
+}
+
+/* FLOATING PREVIEW (Desktop Only) */
+.why-us__preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 220px;
+    pointer-events: none;
+    z-index: 100; /* Ensure on top */
+    visibility: hidden;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+.why-us__preview-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+    box-shadow: 0 40px 120px rgba(0,0,0,0.18);
+    opacity: 0;
+    will-change: opacity;
+}
+
+/* ==================================
+   MOBILE / TABLET STYLES
+   (Overriding Desktop Logic)
+================================== */
+@media (max-width: 992px) {
+
+    /* 1. Hide the Floating Preview completely */
+    .why-us__preview {
+        display: none !important;
+    }
+
+    /* 2. Stack the List Item Content */
+    .why-us__item {
+        flex-direction: column;
+        align-items: flex-start; /* Align text to right (RTL) */
+        text-align: right;
+        padding: 40px 20px;
+        gap: 24px;
+    }
+
+    .why-us__item-header {
+        width: 100%;
+    }
+
+    /* 3. Reveal the Mobile Image */
+    .why-us__mobile-media {
+        display: block;
+        width: 100%;
+        height: 250px;
+        border-radius: 20px;
+        overflow: hidden;
+        margin: 10px 0;
+    }
+
+    .why-us__mobile-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* 4. Force Text Colors (No gray state) */
+    .why-us__text {
+        color: #01024E; /* Active color always */
+        font-size: 28px;
+    }
+
+    /* 5. Force Description Visibility */
+    .why-us__more {
+        opacity: 1 !important;
+        transform: none !important;
+        margin-top: 0;
+        text-align: right;
+        font-size: 16px;
+        max-width: 100%;
+    }
+}

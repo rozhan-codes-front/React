@@ -1,12 +1,13 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
+import '../styles/WhyUsSection.css'; // Assuming you have a separate CSS file
 
 const WHY_US_DATA = [
     {
         id: 1,
         title: "فقط مجری نیستیم",
         desc: "ما شریک تجاری شما هستیم.",
-        image: "/business.jpg" // Make sure these exist in /public
+        image: "/business.jpg"
     },
     {
         id: 2,
@@ -33,34 +34,40 @@ export default function WhyUsSection() {
     const imagesRef = useRef([]);
 
     useEffect(() => {
-        const preview = previewContainerRef.current;
+        // Only run GSAP logic if screen width is larger than tablet (Desktop)
+        // This prevents GSAP calculations on mobile
+        const mm = gsap.matchMedia();
 
-        // 1. SETUP GSAP QUICKTO (The fastest way to move things)
-        const xTo = gsap.quickTo(preview, "x", { duration: 0.4, ease: "power3.out" });
-        const yTo = gsap.quickTo(preview, "y", { duration: 0.4, ease: "power3.out" });
+        mm.add("(min-width: 993px)", () => {
+            const preview = previewContainerRef.current;
 
-        // Center the preview initially
-        gsap.set(preview, { xPercent: -50, yPercent: -50, scale: 0.8, autoAlpha: 0 });
+            const xTo = gsap.quickTo(preview, "x", { duration: 0.4, ease: "power3.out" });
+            const yTo = gsap.quickTo(preview, "y", { duration: 0.4, ease: "power3.out" });
 
-        // 2. MOUSE MOVE (Global listener for smoothness)
-        const onMove = (e) => {
-            xTo(e.clientX);
-            yTo(e.clientY);
-        };
+            gsap.set(preview, { xPercent: -50, yPercent: -50, scale: 0.8, autoAlpha: 0 });
 
-        window.addEventListener('mousemove', onMove);
+            const onMove = (e) => {
+                xTo(e.clientX);
+                yTo(e.clientY);
+            };
 
-        // Cleanup
-        return () => {
-            window.removeEventListener('mousemove', onMove);
-        };
+            window.addEventListener('mousemove', onMove);
+
+            return () => {
+                window.removeEventListener('mousemove', onMove);
+            };
+        });
+
+        return () => mm.revert();
     }, []);
 
     const handleMouseEnter = (index) => {
+        // Check if desktop before animating
+        if (window.innerWidth <= 992) return;
+
         const preview = previewContainerRef.current;
         const targetImage = imagesRef.current[index];
 
-        // 1. Show Container
         gsap.to(preview, {
             autoAlpha: 1,
             scale: 1,
@@ -68,7 +75,6 @@ export default function WhyUsSection() {
             ease: "back.out(1.7)"
         });
 
-        // 2. Show Specific Image (Instant, no loading)
         imagesRef.current.forEach((img, i) => {
             if(i === index) {
                 gsap.to(img, { autoAlpha: 1, duration: 0.2, overwrite: true });
@@ -79,8 +85,9 @@ export default function WhyUsSection() {
     };
 
     const handleMouseLeave = () => {
+        if (window.innerWidth <= 992) return;
+
         const preview = previewContainerRef.current;
-        // Hide Container
         gsap.to(preview, {
             autoAlpha: 0,
             scale: 0.8,
@@ -104,16 +111,24 @@ export default function WhyUsSection() {
                         onMouseEnter={() => handleMouseEnter(index)}
                         onMouseLeave={handleMouseLeave}
                     >
-                        <div>
+                        <div className="why-us__item-header">
                             <span className="why-us__index">0{item.id}</span>
                             <span className="why-us__text">{item.title}</span>
                         </div>
+
+                        {/* NEW: Image rendered inside the list item.
+                           CSS will hide this on Desktop and show it on Mobile.
+                        */}
+                        <div className="why-us__mobile-media">
+                            <img src={item.image} alt={item.title} />
+                        </div>
+
                         <span className="why-us__more">{item.desc}</span>
                     </li>
                 ))}
             </ul>
 
-            {/* PRE-RENDERED IMAGES (Hidden by default) */}
+            {/* PRE-RENDERED IMAGES (For Desktop Hover Effect) */}
             <div className="why-us__preview" ref={previewContainerRef}>
                 {WHY_US_DATA.map((item, index) => (
                     <img

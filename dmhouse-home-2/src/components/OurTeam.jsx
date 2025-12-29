@@ -19,72 +19,79 @@ export default function OurTeam() {
 
         if (!section || !image || !content || !card) return;
 
-        // === 1. PARALLAX IMAGE (Background Scroll) ===
-        gsap.fromTo(image,
-            { y: '-15%' },
-            {
-                y: '15%',
-                ease: 'none',
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    scrub: true
+        // Use matchMedia to handle responsive animations
+        const mm = gsap.matchMedia();
+
+        // === DESKTOP ANIMATIONS ( > 992px ) ===
+        mm.add("(min-width: 993px)", () => {
+
+            // 1. PARALLAX IMAGE (Only on Desktop)
+            gsap.fromTo(image,
+                { y: '-15%' },
+                {
+                    y: '15%',
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: true
+                    }
                 }
-            }
-        );
+            );
 
-        // === 2. TEXT REVEAL (Entrance Animation) ===
-        gsap.fromTo(content,
-            { y: 100, opacity: 0 },
-            {
-                y: 0,
-                opacity: 1,
-                duration: 1.2,
-                ease: 'power3.out',
-                scrollTrigger: {
-                    trigger: section,
-                    start: 'top 75%',
-                    toggleActions: 'play none none reverse'
+            // 2. TEXT REVEAL
+            gsap.fromTo(content,
+                { y: 100, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: section,
+                        start: 'top 75%',
+                        toggleActions: 'play none none reverse'
+                    }
                 }
-            }
-        );
+            );
 
-        // === 3. 3D MOUSE TILT (Interactive) ===
-        // Disable on touch devices for performance
-        if (window.matchMedia("(pointer: coarse)").matches) return;
+            // 3. 3D MOUSE TILT
+            const xTo = gsap.quickTo(card, "rotationY", { duration: 0.4, ease: "power3.out" });
+            const yTo = gsap.quickTo(card, "rotationX", { duration: 0.4, ease: "power3.out" });
 
-        // GSAP QuickTo for performant 60fps rotation
-        const xTo = gsap.quickTo(card, "rotationY", { duration: 0.4, ease: "power3.out" });
-        const yTo = gsap.quickTo(card, "rotationX", { duration: 0.4, ease: "power3.out" });
+            const onMouseMove = (e) => {
+                const { clientX, clientY } = e;
+                const { left, top, width, height } = section.getBoundingClientRect();
+                const xPos = (clientX - left) / width - 0.5;
+                const yPos = (clientY - top) / height - 0.5;
+                xTo(xPos * 15);
+                yTo(-yPos * 15);
+            };
 
-        const onMouseMove = (e) => {
-            const { clientX, clientY } = e;
-            const { left, top, width, height } = section.getBoundingClientRect();
+            const onMouseLeave = () => {
+                xTo(0);
+                yTo(0);
+            };
 
-            // Calculate mouse position (-0.5 to 0.5)
-            const xPos = (clientX - left) / width - 0.5;
-            const yPos = (clientY - top) / height - 0.5;
+            section.addEventListener('mousemove', onMouseMove);
+            section.addEventListener('mouseleave', onMouseLeave);
 
-            // Apply rotation (Max tilt: 15deg)
-            xTo(xPos * 15);
-            yTo(-yPos * 15); // Invert Y for natural look
-        };
+            return () => {
+                section.removeEventListener('mousemove', onMouseMove);
+                section.removeEventListener('mouseleave', onMouseLeave);
+            };
+        });
 
-        const onMouseLeave = () => {
-            // Reset to flat
-            xTo(0);
-            yTo(0);
-        };
+        // === MOBILE CLEANUP ( <= 992px ) ===
+        mm.add("(max-width: 992px)", () => {
+            // Ensure properties are reset if resizing window
+            gsap.set(image, { y: 0 });
+            gsap.set(content, { y: 0, opacity: 1 });
+            gsap.set(card, { rotationY: 0, rotationX: 0 });
+        });
 
-        section.addEventListener('mousemove', onMouseMove);
-        section.addEventListener('mouseleave', onMouseLeave);
-
-        // Cleanup
-        return () => {
-            section.removeEventListener('mousemove', onMouseMove);
-            section.removeEventListener('mouseleave', onMouseLeave);
-        };
+        return () => mm.revert();
 
     }, []);
 
@@ -101,7 +108,7 @@ export default function OurTeam() {
                     <div className="team-image-wrapper">
                         <img
                             ref={imageRef}
-                            src="../../public/ourTeam.jpg"
+                            src="/ourTeam.jpg"
                             alt="DMHouse Team"
                             className="team-img"
                         />

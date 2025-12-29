@@ -14,7 +14,6 @@
     margin-left: auto;
     margin-right: auto;
     max-width: 98vw;
-    /* Cursor indicates interactivity */
     cursor: default;
 }
 
@@ -47,7 +46,6 @@
 .team-overlay-gradient {
     position: absolute;
     inset: 0;
-    /* Gradient: Transparent top -> Dark Bottom Left for text readability */
     background: linear-gradient(
             250deg,
             rgba(0,0,0,0) 0%,
@@ -65,53 +63,33 @@
     display: flex;
     align-items: flex-end; /* Align card to bottom */
     padding-bottom: 80px;
-
-    /* 3D PERSPECTIVE SETUP */
     perspective: 1200px;
     transform-style: preserve-3d;
 }
 
 /* 3. Glass Card Design - THE 3D OBJECT */
 .team-glass-card {
-    /* Glass Effect */
     background: rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.15);
-
     padding: 48px 56px;
     border-radius: 32px;
     max-width: 600px;
     color: #fff;
-
     display: flex;
     flex-direction: column;
     gap: 32px;
-
-    /* Deep Shadow for Float Effect */
     box-shadow:
             0 40px 80px rgba(0,0,0,0.5),
             inset 0 1px 1px rgba(255,255,255,0.2);
-
-    /* CRITICAL FOR 3D CHILDREN */
     transform-style: preserve-3d;
     will-change: transform;
 }
 
-/* --- 3D Z-AXIS LAYERING --- */
-/* Pushing elements "out" of the screen */
-
-.team-header {
-    transform: translateZ(40px);
-}
-
-.team-body {
-    transform: translateZ(20px);
-}
-
-.team-stats-grid {
-    transform: translateZ(50px); /* Pop out the most */
-}
+.team-header { transform: translateZ(40px); }
+.team-body { transform: translateZ(20px); }
+.team-stats-grid { transform: translateZ(50px); }
 
 /* Typography & Elements */
 .team-badge {
@@ -143,7 +121,6 @@
     max-width: 90%;
 }
 
-/* Stats Grid */
 .team-stats-grid {
     display: flex;
     gap: 48px;
@@ -151,7 +128,7 @@
     border-top: 1px solid rgba(255,255,255,0.1);
     border-bottom: 1px solid rgba(255,255,255,0.1);
     margin-bottom: 16px;
-    background: rgba(0,0,0,0.2); /* Slight darkening plate */
+    background: rgba(0,0,0,0.2);
     border-radius: 16px;
     justify-content: center;
 }
@@ -177,7 +154,6 @@
     letter-spacing: 1px;
 }
 
-/* Button */
 .team-btn {
     align-self: flex-start;
     display: flex;
@@ -191,8 +167,6 @@
     font-weight: 800;
     font-size: 15px;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-
-    /* Make button float too */
     transform: translateZ(30px);
 }
 
@@ -210,7 +184,7 @@
     transform: translateX(-5px);
 }
 
-/* --- RESPONSIVE --- */
+/* --- RESPONSIVE FIX --- */
 @media (max-width: 992px) {
     .our-team-section {
         height: auto;
@@ -225,31 +199,45 @@
         position: relative;
         height: 400px;
         border-radius: 0;
+        /* Ensure overlay matches visual bounds exactly */
+        overflow: hidden;
     }
 
     .team-image-wrapper {
+        /* Reset positioning so image fits perfectly without parallax gaps */
         position: absolute;
-        top: 0; height: 100%;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        transform: none !important; /* Force reset any lingering JS transforms */
+    }
+
+    .team-img {
+        /* Ensure image covers area fully */
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
     }
 
     .team-content-layer {
         padding: 0;
-        margin-top: -60px; /* Overlap */
-        perspective: none; /* Disable 3D */
+        margin-top: -60px; /* Overlap effect */
+        perspective: none;
     }
 
     .team-glass-card {
-        background: #101018; /* Solid dark background */
+        background: #101018;
         backdrop-filter: none;
-        margin: 0 20px 40px;
+        margin: -75px 20px 40px;
         border-radius: 24px;
         padding: 32px;
-        transform: none !important; /* Force flat */
-        box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        transform: none !important;
+        box-shadow: none;
     }
 
     .team-header, .team-body, .team-stats-grid, .team-btn {
-        transform: none !important; /* Flatten children */
+        transform: none !important;
     }
 
     .team-title { font-size: 32px; }

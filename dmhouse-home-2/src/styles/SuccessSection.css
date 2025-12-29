@@ -1,0 +1,304 @@
+/* ======================================================
+   SUCCESS SECTION
+====================================================== */
+.success-story {
+    padding-bottom: 120px;
+    position: relative;
+    /* Ensure container doesn't clip the sticky header too early */
+    min-height: 800px;
+}
+
+/* 1. STICKY HEADER LOGIC */
+.success-sticky-head {
+    position: sticky;
+    top: 120px; /* Where it sticks */
+    z-index: 0; /* Behind the cards */
+
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 80px; /* Gap before cards arrive */
+}
+
+.success-sticky-head h2 {
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900;
+    color: #01024E;
+    margin: 0 0 16px;
+}
+
+.success-sticky-head .subtitle {
+    font-size: 18px;
+    color: rgba(1, 2, 78, 0.6);
+}
+
+/* 2. CAROUSEL WRAPPER */
+.success-carousel-wrapper {
+    position: relative;
+    z-index: 10; /* Above the header */
+    /* This margin ensures the first card starts below the header initially,
+       then scrolls UP to cover it */
+    margin-top: 20px;
+}
+
+/* 3. 3D CAROUSEL (Restored Logic) */
+.success-carousel {
+    position: relative;
+    width: min(1400px, 92vw);
+    margin: 0 auto;
+    height: 580px; /* Desktop Height */
+    perspective: 1500px;
+}
+
+.success-cards {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    touch-action: pan-y;
+    cursor: grab;
+}
+.success-cards:active { cursor: grabbing; }
+
+/* =========================
+   THE CARD (3D TRANSFORMS)
+========================= */
+.success-card {
+    position: absolute;
+    inset: 0;
+
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 0;
+
+    background: #fff;
+    border-radius: 200px 40px 40px 40px; /* Unique Radius */
+    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.05);
+
+    will-change: transform, opacity;
+    transform-style: preserve-3d;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: hidden;
+
+    /* Hidden / Init State */
+    transform: translateX(15%) translateZ(-100px) rotateY(-5deg);
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+
+    transition:
+            transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
+            opacity 0.6s ease;
+}
+
+/* ACTIVE State */
+.success-card.is-active {
+    transform: translateX(0) translateZ(0) rotateY(0);
+    opacity: 1;
+    z-index: 10;
+    pointer-events: auto;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.12);
+}
+
+/* NEXT State (Preview) */
+.success-card.is-next {
+    transform: translateX(8%) translateZ(-150px) rotateY(-8deg);
+    opacity: 0.6;
+    z-index: 1;
+    filter: grayscale(1);
+}
+
+/* =========================
+   CARD INTERNALS
+========================= */
+.success-card__visual {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+    background: #f4f6f8;
+}
+
+.success-card__visual img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.success-card__content {
+    padding: 48px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
+    position: relative;
+    z-index: 2;
+}
+
+.sc-header { margin-bottom: 24px; }
+
+.sc-badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #EF3E63;
+    background: rgba(239, 62, 99, 0.1);
+    padding: 6px 12px;
+    border-radius: 99px;
+    margin-bottom: 12px;
+}
+
+.sc-title {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 900;
+    color: #01024E;
+}
+
+.sc-hero-metric { margin-bottom: 32px; }
+
+.sc-hero-val {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 0.9;
+    color: #01024E;
+    letter-spacing: -2px;
+}
+
+.sc-hero-unit {
+    font-size: 20px;
+    font-weight: 700;
+    opacity: 0.8;
+    letter-spacing: 0;
+    margin-right: 3px;
+}
+
+.text-blue { color: #2E2F7E; }
+.text-purple { color: #8e44ad; }
+
+.sc-hero-label {
+    margin: 8px 0 0;
+    font-size: 15px;
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.sc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.sc-box {
+    background: #f8f9fa;
+    padding: 16px 20px;
+    border-radius: 12px; /* Reverted to simple radius for cleanliness */
+    border-left: 2px solid transparent;
+}
+
+.sc-box-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    opacity: 0.7;
+    margin-bottom: 4px;
+}
+
+.sc-box-val {
+    font-size: 16px;
+    font-weight: 800;
+}
+
+.text-danger { color: #EF3E63; }
+.text-accent { color: #27ae60; }
+
+/* =========================
+   CONTROLS
+========================= */
+.success-controls {
+    position: absolute;
+    left: 40px;
+    bottom: 40px;
+    z-index: 20;
+    display: flex;
+    gap: 12px;
+}
+
+.success-btn {
+    height: 52px;
+    padding: 0 24px;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 99px;
+    color: #01024E;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+    font-family: "Dana";
+}
+
+.success-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    border-color: #EF3E63;
+}
+
+.success-btn--prev { width: 52px; padding: 0; justify-content: center; }
+.btn-icon { display: flex; align-items: center; justify-content: center; }
+.btn-text { font-size: 14px; font-weight: 800; }
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 992px) {
+    .success-carousel {
+        height: 720px;
+        perspective: none;
+    }
+
+    .success-card {
+        grid-template-columns: 1fr;
+        grid-template-rows: 250px 1fr;
+    }
+
+    .success-card__visual {
+        clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+    }
+
+    .success-card__content {
+        padding: 32px 24px 80px 24px;
+    }
+
+    .sc-hero-val {
+        font-size: 48px;
+    }
+
+    /* On mobile, keep sticky behavior or allow natural scroll */
+    .success-sticky-head {
+        top: 80px;
+        height: auto;
+        margin-bottom: 40px;
+    }
+
+    .success-controls {
+        left: 24px;
+        bottom: 4px;
+        width: calc(100% - 48px);
+        justify-content: space-between;
+    }
+
+    .success-btn { flex: 1; }
+    .success-btn--prev { flex: 0 0 52px; }
+}
