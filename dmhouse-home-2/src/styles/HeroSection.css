@@ -6,6 +6,10 @@
     height: 100vh;
     position: relative;
     overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 /* =======================
