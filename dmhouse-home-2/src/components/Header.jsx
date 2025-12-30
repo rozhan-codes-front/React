@@ -43,7 +43,6 @@ export default function Header() {
     const handleLinkClick = () => setMobileMenuOpen(false);
 
     const toggleMobileSub = (id) => {
-        // Toggle logic: If clicking the same ID, close it (null). If new ID, open it.
         setActiveMobileSub(prev => (prev === id ? null : id));
     };
 
@@ -56,7 +55,6 @@ export default function Header() {
                         <img src={brand.logoUrl} alt={brand.name} className="brand-logo-img"/>
                     </a>
 
-                    {/* DESKTOP NAV */}
                     <nav className="header-nav-desktop">
                         <ul className="nav-list">
                             {navigation.map((item) => (
@@ -106,14 +104,14 @@ export default function Header() {
                     </nav>
 
                     <div className="header-actions">
-                        <a href={cta.href} className="header-cta">
+                        <a href={cta.href} className="header-cta primary-btn">
                             <span>{cta.title}</span>
                             <div className="cta-shine"></div>
                             <span className="cta-icon-phone">📞</span>
                         </a>
 
                         <button
-                            type="button" // Always specify type for buttons
+                            type="button"
                             className={`mobile-toggle ${mobileMenuOpen ? 'is-active' : ''}`}
                             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                             aria-label="Toggle menu"
@@ -126,7 +124,6 @@ export default function Header() {
                 </div>
             </header>
 
-            {/* MOBILE MENU OVERLAY */}
             <div
                 className={`mobile-menu-overlay ${mobileMenuOpen ? 'is-open' : ''}`}
                 onClick={() => setMobileMenuOpen(false)}
@@ -177,7 +174,6 @@ export default function Header() {
                                     </a>
                                 )}
 
-                                {/* ACCORDION CONTENT */}
                                 {item.hasMegaMenu && (
                                     <div className={`mobile-accordion ${activeMobileSub === item.id ? 'is-open' : ''}`}>
                                         <div className="mobile-accordion-inner">
@@ -219,7 +215,7 @@ export default function Header() {
                     <a href="#" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
                         <img src={brand.logoUrl} alt="Logo" className="bottom-logo"/>
                     </a>
-                    <a href={cta.href} className="bottom-cta">
+                    <a href={cta.href} className="bottom-cta primary-btn">
                         <span>{cta.title}</span>
                         <span style={{fontSize: '1.2em', lineHeight: 1, display: 'flex', alignItems: 'center'}}>
                              <img src="/svg/left-white.svg" alt="Arrow" style={{width: '24px', height: 'auto'}}/>

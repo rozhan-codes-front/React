@@ -1,5 +1,5 @@
 .our-team-section-wrapper {
-    margin-top: 120px;
+    padding: 120px 0;
 }
 
 /* Container: Full Width, Fixed Height */
@@ -184,8 +184,10 @@
     transform: translateX(-5px);
 }
 
-/* --- RESPONSIVE FIX --- */
 @media (max-width: 992px) {
+    .our-team-section-wrapper {
+        padding: 80px 0;
+    }
     .our-team-section {
         height: auto;
         min-height: auto;
@@ -197,24 +199,21 @@
 
     .team-visual {
         position: relative;
+        margin: 0 8px;
         height: 400px;
-        border-radius: 0;
-        /* Ensure overlay matches visual bounds exactly */
         overflow: hidden;
     }
 
     .team-image-wrapper {
-        /* Reset positioning so image fits perfectly without parallax gaps */
         position: absolute;
         top: 0;
         left: 0;
         height: 100%;
         width: 100%;
-        transform: none !important; /* Force reset any lingering JS transforms */
+        transform: none !important;
     }
 
     .team-img {
-        /* Ensure image covers area fully */
         height: 100%;
         width: 100%;
         object-fit: cover;

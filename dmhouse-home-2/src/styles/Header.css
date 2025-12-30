@@ -241,19 +241,23 @@
 
 .header-cta {
     position: relative;
-    padding: 10px 24px;
-    background: var(--primary);
-    color: #fff;
+    /*padding: 10px 24px;*/
+    /*background: var(--primary);*/
+    /*color: #fff;*/
     text-decoration: none;
-    font-weight: 700;
-    font-size: 14px;
-    border-radius: 50px;
-    overflow: hidden;
-    transition: transform 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 15px rgba(239, 62, 99, 0.3);
+    /*font-weight: 700;*/
+    /*font-size: 14px;*/
+    /*border-radius: 50px;*/
+    /*overflow: hidden;*/
+    /*transition: transform 0.2s;*/
+    /*display: flex;*/
+    /*align-items: center;*/
+    /*gap: 8px;*/
+    /*box-shadow: 0 4px 15px rgba(239, 62, 99, 0.3);*/
+}
+
+.cta-icon-phone {
+    padding-right: 6px;
 }
 
 .header-cta:hover {

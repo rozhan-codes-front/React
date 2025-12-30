@@ -2,6 +2,11 @@
    FOOTER STYLES
 ========================= */
 
+.site-footer .primary-btn {
+    border-radius: 8px;
+    font-family: 'Dana';
+}
+
 .footer-logo-wrapper {
     margin-bottom: 20px;
 }
@@ -15,7 +20,6 @@
 
 .site-footer {
     position: relative;
-    /* Reduced top margin since card is smaller */
     margin-top: 140px;
     background: var(--navy);
     color: #fff;
@@ -23,20 +27,16 @@
     z-index: 10;
 }
 
-/* === 3D FLOATING CARD (COMPACT VERSION) === */
 .footer-float-card {
     position: absolute;
-    /* Adjusted top offset for smaller height */
     top: -130px;
     left: 50%;
     transform: translateX(-50%);
-
-    /* MADE SMALLER: 1100px -> 850px */
     width: min(850px, 92vw);
 
-    background: linear-gradient(135deg, #ffffff, #f0f2f5);
-    border-radius: 24px; /* Slightly tighter radius */
-    padding: 10px; /* Inner border spacing */
+    background: linear-gradient(-90deg, #ffffff, #ffdee5);
+    border-radius: 24px;
+    padding: 10px;
 
     display: flex;
     align-items: center;
@@ -50,7 +50,6 @@
 
 .float-card-content {
     flex: 1;
-    /* MADE SMALLER: 48px -> 32px */
     padding: 32px;
     display: flex;
     flex-direction: column;
@@ -59,7 +58,6 @@
 
 .float-text h3 {
     color: var(--primary);
-    /* MADE SMALLER: 32px -> 26px */
     font-size: 26px;
     margin: 0 0 6px;
 }
@@ -103,14 +101,13 @@
 }
 
 .float-card-image {
-    /* MADE SMALLER: 320x380 -> 220x220 */
     width: 220px;
     height: 220px;
     border-radius: 20px;
     overflow: hidden;
     margin-right: 12px;
     background: #eef0f4;
-    flex-shrink: 0; /* Prevents squishing */
+    flex-shrink: 0;
 }
 
 .float-card-image img {
@@ -119,9 +116,7 @@
     object-fit: cover;
 }
 
-/* === MAIN FOOTER CONTENT === */
 .footer-main {
-    /* REDUCED: 200px -> 160px (Because card sticks out less) */
     padding-top: 160px;
     padding-bottom: 40px;
 }
@@ -133,7 +128,6 @@
     margin-bottom: 60px;
 }
 
-/* Brand Column */
 .footer-logo { font-size: 32px; color: var(--primary); margin: 0 0 20px; }
 
 .footer-desc {
@@ -155,14 +149,19 @@
     align-items: center;
     justify-content: center;
     transition: 0.2s;
+    color: #fff;
+}
+
+.social-btn svg {
+    display: block;
 }
 
 .social-btn:hover {
     background: var(--primary);
     transform: translateY(-3px);
+    color: #fff;
 }
 
-/* Contact Column */
 .footer-contact-col {
     display: flex;
     flex-direction: column;
@@ -187,7 +186,6 @@
 .cp-label { font-size: 10px; opacity: 0.5; }
 .cp-val { font-weight: 700; font-size: 13px; direction: ltr; text-align: right; }
 
-/* Links Columns */
 .footer-links-col {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -221,7 +219,6 @@
     padding-right: 5px;
 }
 
-/* Bottom Bar */
 .footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.1);
     text-align: center;
@@ -230,24 +227,22 @@
     font-size: 12px;
 }
 
-/* === RESPONSIVE === */
 @media (max-width: 992px) {
     .site-footer {
         margin-top: 120px;
+        padding: 0 12px;
     }
 
     .footer-float-card {
         width: 92vw;
-        flex-direction: column-reverse; /* Stack: Image on bottom of card */
+        flex-direction: column-reverse;
         text-align: center;
         padding: 0;
-        /* Adjusted top offset for mobile stack */
         top: -150px;
     }
 
     .float-card-image {
         width: 100%;
-        /* Shorter image on mobile to save vertical space */
         height: 140px;
         margin: 0;
     }

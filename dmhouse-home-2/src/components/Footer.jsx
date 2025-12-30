@@ -17,7 +17,7 @@ export default function Footer() {
 
                     <form className="float-form" onSubmit={(e) => e.preventDefault()}>
                         <input type="tel" placeholder={footer.consultation.placeholder} />
-                        <button type="submit" className="float-btn">
+                        <button type="submit" className="primary-btn float-btn">
                             ارسال
                         </button>
                     </form>
@@ -31,9 +31,7 @@ export default function Footer() {
             <div className="footer-main">
                 <div className="footer-grid page-container">
 
-                    {/* Brand Column */}
                     <div className="footer-brand-col">
-                        {/* UPDATED: Image Logo instead of H2 Text */}
                         <div className="footer-logo-wrapper">
                             <img src={brand.logoUrl} alt={brand.name} className="footer-logo-img" />
                         </div>
@@ -42,12 +40,26 @@ export default function Footer() {
 
                         <div className="footer-socials">
                             {footer.socials.map((s) => (
-                                <a key={s.id} href={s.href} className={`social-btn is-${s.icon}`}></a>
+                                <a
+                                    key={s.id}
+                                    href={s.href}
+                                    className="social-btn"
+                                    aria-label={s.name}
+                                >
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 24 24"
+                                        fill="currentColor"
+                                        width="20px"
+                                        height="20px"
+                                    >
+                                        <path d={s.iconPath} />
+                                    </svg>
+                                </a>
                             ))}
                         </div>
                     </div>
 
-                    {/* Contact Info Column */}
                     <div className="footer-contact-col">
                         {footer.contact.map((c) => (
                             <div key={c.id} className="contact-pill">

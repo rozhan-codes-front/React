@@ -2,9 +2,8 @@
    SUCCESS SECTION
 ====================================================== */
 .success-story {
-    padding-bottom: 120px;
+    padding: 120px 0;
     position: relative;
-    /* Ensure container doesn't clip the sticky header too early */
     min-height: 800px;
 }
 
@@ -95,8 +94,6 @@
             transform 0.9s cubic-bezier(0.2, 0.8, 0.2, 1),
             opacity 0.6s ease;
 }
-
-/* ACTIVE State */
 .success-card.is-active {
     transform: translateX(0) translateZ(0) rotateY(0);
     opacity: 1;
@@ -105,12 +102,12 @@
     box-shadow: 0 30px 80px rgba(0,0,0,0.12);
 }
 
-/* NEXT State (Preview) */
 .success-card.is-next {
-    transform: translateX(8%) translateZ(-150px) rotateY(-8deg);
-    opacity: 0.6;
-    z-index: 1;
-    filter: grayscale(1);
+    transform: translateX(10%) translateZ(-190px) rotateY(-4deg);
+    opacity: 0.9;
+    z-index: 5;
+    filter: grayscale(0) brightness(0.95);
+    box-shadow: -20px 0 40px rgba(0,0,0,0.08);
 }
 
 /* =========================
@@ -263,6 +260,9 @@
    RESPONSIVE
 ========================= */
 @media (max-width: 992px) {
+    .success-story {
+        padding: 80px 0;
+    }
     .success-carousel {
         height: 720px;
         perspective: none;
@@ -294,7 +294,7 @@
 
     .success-controls {
         left: 24px;
-        bottom: 4px;
+        bottom: 8px;
         width: calc(100% - 48px);
         justify-content: space-between;
     }
