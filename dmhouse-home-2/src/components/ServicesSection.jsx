@@ -1,16 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 
-// === DATA CONFIGURATION ===
 const SERVICES_DATA = [
     {
         id: 1,
         href: '/seo',
         title: 'سئو',
         shortDesc: 'افزایش ترافیک هدفمند، رشد پایدار و نتایج قابل اندازه‌گیری',
-        video: '/tech.mp4',
+        video: 'https://dmhouse.agency/wp-content/uploads/2025/12/tech.mp4',
         tag: 'سرویس تخصصی',
         hoverTitle: 'سئو و رشد ارگانیک',
-        // hoverDesc removed from usage but kept in data if needed later
         hoverDesc: 'بهینه‌سازی ساختار سایت، تولید محتوای هدفمند و افزایش جایگاه در نتایج گوگل با تمرکز بر جذب لید و فروش واقعی.',
         features: ['تحلیل رقبا و کیورد ریسرچ', 'سئو تکنیکال و بهبود سرعت', 'استراتژی محتوای بلندمدت'],
         ctaPrimary: 'مشاهده جزئیات سرویس',
@@ -21,7 +19,7 @@ const SERVICES_DATA = [
         href: '/web-design',
         title: 'طراحی سایت',
         shortDesc: 'طراحی تجربه کاربری مدرن، سریع و تبدیل‌محور',
-        video: '/tech.mp4',
+        video: 'https://dmhouse.agency/wp-content/uploads/2025/12/tech.mp4',
         tag: 'سرویس تخصصی',
         hoverTitle: 'طراحی سایت مدرن',
         hoverDesc: 'طراحی و توسعه وب‌سایت‌های سریع، مقیاس‌پذیر و کاربرمحور با تمرکز بر تجربه کاربری و افزایش نرخ تبدیل.',
@@ -34,7 +32,7 @@ const SERVICES_DATA = [
         href: '/digital-marketing',
         title: 'دیجیتال مارکتینگ و ادز',
         shortDesc: 'کمپین‌های داده‌محور برای جذب لید و فروش بیشتر',
-        video: '/tech.mp4',
+        video: 'https://dmhouse.agency/wp-content/uploads/2025/12/tech.mp4',
         tag: 'سرویس رشد',
         hoverTitle: 'دیجیتال مارکتینگ و تبلیغات',
         hoverDesc: 'اجرای کمپین‌های تبلیغاتی هدفمند و داده‌محور برای جذب لید باکیفیت و افزایش فروش قابل اندازه‌گیری.',
@@ -47,7 +45,7 @@ const SERVICES_DATA = [
         href: '/branding',
         title: 'گرافیک و برندینگ',
         shortDesc: 'هویت بصری منسجم برای ماندگاری در ذهن مخاطب',
-        video: '/tech.mp4',
+        video: 'https://dmhouse.agency/wp-content/uploads/2025/12/tech.mp4',
         tag: 'هویت بصری',
         hoverTitle: 'گرافیک و برندینگ',
         hoverDesc: 'خلق هویت بصری منسجم و متمایز برای ایجاد اعتماد، تمایز برند و ماندگاری در ذهن مخاطب.',
@@ -60,7 +58,7 @@ const SERVICES_DATA = [
         href: '/social-media',
         title: 'شبکه‌های اجتماعی',
         shortDesc: 'ساخت ارتباط واقعی با مخاطب و رشد ارگانیک',
-        video: '/tech.mp4',
+        video: 'https://dmhouse.agency/wp-content/uploads/2025/12/tech.mp4',
         tag: 'مدیریت ارتباط',
         hoverTitle: 'شبکه‌های اجتماعی',
         hoverDesc: 'مدیریت و رشد حضور برند در شبکه‌های اجتماعی با تولید محتوای هدفمند و تعامل واقعی با مخاطبان.',
@@ -85,6 +83,8 @@ export default function ServicesSection() {
         const handleVideoPlay = () => {
             videos.forEach(video => {
                 video.muted = true;
+                // Force reload if src changed dynamically (safeguard)
+                video.load();
                 video.play().catch(() => {});
                 video.closest('.serviceStackCard')?.addEventListener('mouseenter', () => video.play());
             });
@@ -167,18 +167,17 @@ export default function ServicesSection() {
                             <span>مشاهده سرویس</span>
                         </div>
 
-                        {/* Background Video */}
                         <video
                             className="serviceVideo"
+                            src={service.video}
                             muted
                             loop
                             playsInline
                             preload="auto"
-                        >
-                            <source src={service.video} type="video/mp4" />
-                        </video>
+                            // Optional: Add a poster image from data if you want a cover while loading
+                            // poster={service.image}
+                        />
 
-                        {/* Hover Overlay State */}
                         <div className="serviceStackCard__hover">
                             <div className="serviceStackCard__hoverInner">
                                 <span className="serviceStackCard__tag">{service.tag}</span>
@@ -186,8 +185,6 @@ export default function ServicesSection() {
                                 <h4 className="serviceStackCard__hoverTitle">
                                     {service.hoverTitle}
                                 </h4>
-
-                                {/* REMOVED <p className="serviceStackCard__hoverDesc"> here */}
 
                                 <ul className="serviceStackCard__features">
                                     {service.features.map((feature, i) => (

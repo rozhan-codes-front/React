@@ -152,14 +152,14 @@ export default function SuccessSection() {
                     <div className="success-controls">
                         <button className="success-btn success-btn--prev" aria-label="Previous" onClick={goPrev}>
                             <span className="btn-icon">
-                                <img src="/svg/left.svg" alt="" width="25px" style={{ transform: 'rotate(180deg)' }} />
+                                <img src="https://dmhouse.agency/wp-content/uploads/2025/12/left.svg" alt="" width="25px" style={{ transform: 'rotate(180deg)' }} />
                             </span>
                         </button>
 
                         <button className="success-btn success-btn--next" aria-label="Next" onClick={goNext}>
                             <span className="btn-text">پروژه بعدی</span>
                             <span className="btn-icon">
-                                <img src="/svg/left.svg" alt="" width="25px" />
+                                <img src="https://dmhouse.agency/wp-content/uploads/2025/12/left.svg" alt="" width="25px" />
                             </span>
                         </button>
                     </div>

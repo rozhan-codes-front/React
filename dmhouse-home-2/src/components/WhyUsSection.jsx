@@ -7,25 +7,25 @@ const WHY_US_DATA = [
         id: 1,
         title: "فقط مجری نیستیم",
         desc: "ما شریک تجاری شما هستیم.",
-        image: "/business.jpg"
+        image: "https://dmhouse.agency/wp-content/uploads/2025/11/2149142115.jpg"
     },
     {
         id: 2,
         title: "شفافیت کامل",
         desc: "گزارش دهی منظم و برگزاری جلسات (اسپرینت ها).",
-        image: "/honesty.jpg"
+        image: "https://dmhouse.agency/wp-content/uploads/2025/11/representation-user-experience-interface-design.jpg"
     },
     {
         id: 3,
         title: "تیم متخصص",
         desc: "تیم ما برخلاف فریلنسرها بر پروژه ما متمرکز است.",
-        image: "/team.jpg"
+        image: "https://dmhouse.agency/wp-content/uploads/2025/10/young-female-logo-designer-working-graphic-tablet.jpg"
     },
     {
         id: 4,
         title: "نتیجه‌گرا",
         desc: "تمرکز بر RoI و فروش. نه فقط لایک و بازدید.",
-        image: "/result.jpg"
+        image: "https://dmhouse.agency/wp-content/uploads/2025/12/result.jpg"
     }
 ];
 
@@ -115,10 +115,6 @@ export default function WhyUsSection() {
                             <span className="why-us__index">0{item.id}</span>
                             <span className="why-us__text">{item.title}</span>
                         </div>
-
-                        {/* NEW: Image rendered inside the list item.
-                           CSS will hide this on Desktop and show it on Mobile.
-                        */}
                         <div className="why-us__mobile-media">
                             <img src={item.image} alt={item.title} />
                         </div>

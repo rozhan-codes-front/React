@@ -23,7 +23,7 @@ export const TESTIMONIALS_DATA = [
         quote: "ما برای توسعه کسب و کارمون توی فضای دیجیتال با تیم DM House آشنا شدیم . تقریبا 3 الی 4 ماه بعد از شروع همکاری‌مون، تونستیم به رده‌های اول تا سوم کلمات کلیدی رشته خودمون برسیم. همبستگی و هماهنگی بین کارفرما و تیم دیجیتال مارکتینگ جز نقاط قوت این تیم است. توصیه می‌کنم برای توسعه کسب و کارتون حتما از مشاوره‌ها و خدمات DM House استفاده کنید.",
         name: "حمید ذوالفقاری",
         role: "مدرس و مشاور آزمون های ارشد پرستاری",
-        image: "/zol.png", // Adjusted path for standard public folder usage
+        image: "https://dmhouse.agency/wp-content/uploads/2025/12/zol.png",
         logo: "https://dmhouse.agency/wp-content/uploads/2023/05/%D8%A7%D8%B1%D8%B4%D8%AF-%D9%BE%DB%8C.jpg",
         cardColor: "#F0EABB"
     },
@@ -32,7 +32,7 @@ export const TESTIMONIALS_DATA = [
         quote: "طی 12 سال سابقه‌ در حوزه آموزش آنلاین آیلتس، با گروه‌های زیادی در زمینه سئو سایت همکاری داشتیم؛ اما آخرین و بدون شک بهترین‌شون، تیم DM House بود. لپ کلام، خیلی ساده بخوام صحبت کنم، تمام انتظارات سختگیرانه ما رو در حوزه سئو برآورده کردن. از پشتیبانی دقیق و منظم گرفته، تا برنامه ریزی دقیق و ارائه یک چشم انداز منطقی و بر پایه تجربه.",
         name: "محمدجواد مردان",
         role: "مدیر آکادمی زبان آیلتس میکس",
-        image: "/mardan.png", // Adjusted path for standard public folder usage
+        image: "https://dmhouse.agency/wp-content/uploads/2025/12/mardan.png",
         logo: "https://dmhouse.agency/wp-content/uploads/2024/01/cropped-ieltsmix-fav-icon.png",
         cardColor: "#C3F0BB"
     },

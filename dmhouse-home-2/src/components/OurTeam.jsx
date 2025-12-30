@@ -108,7 +108,7 @@ export default function OurTeam() {
                     <div className="team-image-wrapper">
                         <img
                             ref={imageRef}
-                            src="/ourTeam.jpg"
+                            src="https://dmhouse.agency/wp-content/uploads/2025/12/ourTeam.jpg"
                             alt="DMHouse Team"
                             className="team-img"
                         />

@@ -63,7 +63,7 @@ export default function BackToTop() {
 
                 {/* Arrow Icon */}
                 <span className="btt-icon">
-                    <img src="/svg/top.svg" alt="Up" style={{ width: '14px' }} />
+                    <img src="https://dmhouse.agency/wp-content/uploads/2025/12/top.svg" alt="Up" style={{ width: '14px' }} />
                 </span>
             </div>
         </button>

@@ -218,7 +218,7 @@ export default function Header() {
                     <a href={cta.href} className="bottom-cta primary-btn">
                         <span>{cta.title}</span>
                         <span style={{fontSize: '1.2em', lineHeight: 1, display: 'flex', alignItems: 'center'}}>
-                             <img src="/svg/left-white.svg" alt="Arrow" style={{width: '24px', height: 'auto'}}/>
+                             <img src="https://dmhouse.agency/wp-content/uploads/2025/12/left-white.svg" alt="Arrow" style={{width: '24px', height: 'auto'}}/>
                         </span>
                     </a>
                 </div>

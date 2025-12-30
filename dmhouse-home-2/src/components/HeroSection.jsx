@@ -94,7 +94,7 @@ export default function HeroSection() {
                     <video
                         ref={videoRef}
                         className="heroVisual__video"
-                        src="/hero-video.mp4"
+                        src="https://dmhouse.agency/wp-content/uploads/2025/12/hero-video.mp4"
                         autoPlay
                         loop
                         muted
