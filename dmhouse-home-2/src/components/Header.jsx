@@ -106,7 +106,9 @@ export default function Header() {
                     <div className="header-actions">
                         <a href={cta.href} className="header-cta primary-btn">
                             <span>{cta.title}</span>
-                            <div className="cta-shine"></div>
+                            <div className="cta-mask">
+                                <div className="cta-shine"></div>
+                            </div>
                             <span className="cta-icon-phone">📞</span>
                         </a>
 
@@ -217,6 +219,9 @@ export default function Header() {
                     </a>
                     <a href={cta.href} className="bottom-cta primary-btn">
                         <span>{cta.title}</span>
+                        <div className="cta-mask">
+                            <div className="cta-shine"></div>
+                        </div>
                         <span style={{fontSize: '1.2em', lineHeight: 1, display: 'flex', alignItems: 'center'}}>
                              <img src="https://dmhouse.agency/wp-content/uploads/2025/12/left-white.svg" alt="Arrow" style={{width: '24px', height: 'auto'}}/>
                         </span>

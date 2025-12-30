@@ -241,19 +241,8 @@
 
 .header-cta {
     position: relative;
-    /*padding: 10px 24px;*/
-    /*background: var(--primary);*/
-    /*color: #fff;*/
     text-decoration: none;
-    /*font-weight: 700;*/
-    /*font-size: 14px;*/
-    /*border-radius: 50px;*/
-    /*overflow: hidden;*/
-    /*transition: transform 0.2s;*/
-    /*display: flex;*/
-    /*align-items: center;*/
-    /*gap: 8px;*/
-    /*box-shadow: 0 4px 15px rgba(239, 62, 99, 0.3);*/
+    z-index: 1;
 }
 
 .cta-icon-phone {
@@ -262,6 +251,15 @@
 
 .header-cta:hover {
     transform: scale(1.05);
+}
+
+.cta-mask {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
 }
 
 .cta-shine {
@@ -273,6 +271,7 @@
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
     transform: skewX(-20deg);
     animation: shine 3s infinite;
+    z-index: 1;
 }
 
 @keyframes shine {

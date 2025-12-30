@@ -867,25 +867,6 @@ body {
     border-radius: 200px 36px 36px 36px;
 }
 
-@media (max-width: 992px) {
-    .serviceStackCard {
-        flex-direction: column;
-        gap: 40px;
-        padding: 20px;
-    }
-
-    .serviceStackCard video {
-        border-radius: 36px;
-    }
-
-    .servicesStack__list {
-        gap: 0;
-    }
-    .servicesStack {
-        padding: 80px 0;
-    }
-}
-
 /* Typography */
 .serviceStackCard h3 {
     font-size: clamp(28px, 4vw, 56px);
@@ -905,30 +886,7 @@ body {
     color: #EF3E63;
 }
 
-/* HOVER STATES (OPTIMIZED) */
-.serviceStackCard:hover .serviceStackCard__inner {
-    transform: translateY(-8px); /* Inner element moves, parent stays for scroll */
-}
-
-.serviceStackCard:hover {
-    box-shadow: 0 50px 100px rgba(0, 0, 0, 0.15);
-    transition: box-shadow 0.3s ease-out;
-}
-
-/* Mobile tuning */
-@media (max-width: 768px) {
-    .serviceStackCard {
-        margin-top: -55px;
-        top: 90px;
-    }
-
-    .serviceStackCard__inner {
-        min-height: auto;
-    }
-}
-
-/* ===== Service hover overlay (FASTER) ===== */
-
+/* ===== Service hover overlay ===== */
 .serviceStackCard__hover {
     position: absolute;
     inset: 0;
@@ -1004,8 +962,6 @@ body {
     color: #01024E;
 }
 
-/* REMOVED .serviceStackCard__hoverDesc styling */
-
 /* Features */
 .serviceStackCard__features {
     margin: 12px 0 0;
@@ -1060,26 +1016,81 @@ body {
     color: rgba(1, 2, 78, 0.7);
 }
 
-/* Hover trigger */
-.serviceStackCard:hover .serviceStackCard__hover {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
+@media (hover: hover) {
+    .serviceStackCard:hover .serviceStackCard__inner {
+        transform: translateY(-8px);
+    }
+
+    .serviceStackCard:hover {
+        box-shadow: 0 50px 100px rgba(0, 0, 0, 0.15);
+        transition: box-shadow 0.3s ease-out;
+    }
+
+    .serviceStackCard:hover .serviceStackCard__hover {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+    }
 }
 
-/* Responsive */
 @media (max-width: 992px) {
+    .serviceStackCard {
+        flex-direction: column;
+        gap: 40px;
+        padding: 20px;
+        top: 100px;
+    }
+
+    .serviceStackCard video {
+        border-radius: 36px;
+    }
+
+    .servicesStack__list {
+        gap: 24px;
+    }
+
+    .servicesStack {
+        padding: 80px 0;
+    }
+
     .serviceStackCard__hoverInner {
         inset-inline-start: 20px;
         inset-inline-end: 20px;
         inset-block-end: 28px;
-
         grid-template-columns: 1fr;
         gap: 24px;
     }
 
     .serviceStackCard__hoverTitle {
         font-size: 32px;
+    }
+}
+
+@media (max-width: 768px) {
+    .serviceStackCard {
+        margin-top: -55px;
+        top: 90px;
+    }
+
+    .serviceStackCard__inner {
+        min-height: auto;
+    }
+}
+
+@media (hover: none), (max-width: 992px) {
+
+    .serviceStackCard__hover {
+        display: none !important;
+    }
+
+    .serviceStackCard:hover .serviceStackCard__inner,
+    .serviceStackCard:active .serviceStackCard__inner {
+        transform: none !important;
+    }
+
+    .serviceStackCard:active {
+        transform: scale(0.98);
+        transition: transform 0.1s;
     }
 }
 
