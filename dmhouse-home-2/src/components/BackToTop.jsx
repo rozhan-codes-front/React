@@ -1,49 +1,61 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../styles/BackToTop.css';
 
 export default function BackToTop() {
     const [isVisible, setIsVisible] = useState(false);
-    const [progress, setProgress] = useState(0);
+    const progressRef = useRef(null);
+    const rafId = useRef(null);
+
+    // Constants
+    const radius = 18;
+    const circumference = 2 * Math.PI * radius;
 
     useEffect(() => {
         const handleScroll = () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.body.scrollHeight - window.innerHeight;
+            if (rafId.current) cancelAnimationFrame(rafId.current);
 
-            const scrollPercent = (scrollTop / docHeight) * 100;
-            setProgress(scrollPercent);
+            rafId.current = requestAnimationFrame(() => {
+                const scrollTop = window.scrollY;
+                const docHeight = document.body.scrollHeight - window.innerHeight;
 
-            if (scrollTop > window.innerHeight * 1.5) {
-                setIsVisible(true);
-            } else {
-                setIsVisible(false);
-            }
+                const shouldBeVisible = scrollTop > window.innerHeight * 1.5;
+                setIsVisible(prev => (prev !== shouldBeVisible ? shouldBeVisible : prev));
+
+                if (progressRef.current && docHeight > 0) {
+                    const scrollPercent = scrollTop / docHeight;
+                    const dashoffset = circumference - (scrollPercent * circumference);
+
+                    progressRef.current.style.strokeDashoffset = dashoffset;
+                }
+            });
         };
 
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+        handleScroll();
 
-    const scrollToTop = () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            if (rafId.current) cancelAnimationFrame(rafId.current);
+        };
+    }, [circumference]);
+
+    const handleTouchEnd = (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    // SVG Circle Math
-    const radius = 18;
-    const circumference = 2 * Math.PI * radius;
-    const strokeDashoffset = circumference - (progress / 100) * circumference;
+    const handleClick = () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
     return (
         <button
             className={`back-to-top ${isVisible ? 'is-visible' : ''}`}
-            onClick={scrollToTop}
+            onClick={handleClick}
+            onTouchEnd={handleTouchEnd}
             aria-label="Back to Top"
         >
             <div className="btt-content">
-                {/* Progress Ring SVG */}
                 <svg className="btt-progress" width="44" height="44" viewBox="0 0 44 44">
                     <circle
                         className="btt-bg-ring"
@@ -52,16 +64,16 @@ export default function BackToTop() {
                         strokeWidth="3"
                     />
                     <circle
+                        ref={progressRef}
                         className="btt-fill-ring"
                         cx="22" cy="22" r={radius}
                         fill="transparent"
                         strokeWidth="3"
                         strokeDasharray={circumference}
-                        strokeDashoffset={strokeDashoffset}
+                        style={{ strokeDashoffset: circumference }}
                     />
                 </svg>
 
-                {/* Arrow Icon */}
                 <span className="btt-icon">
                     <img src="https://dmhouse.agency/wp-content/uploads/2025/12/top.svg" alt="Up" style={{ width: '14px' }} />
                 </span>

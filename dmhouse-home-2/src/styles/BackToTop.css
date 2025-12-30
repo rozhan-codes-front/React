@@ -19,11 +19,14 @@
     transform: translateY(20px);
 
     /* PREVENTS DOUBLE TAP ISSUE */
-    pointer-events: none;
-    touch-action: manipulation; /* Removes tap delay on mobile */
-    -webkit-tap-highlight-color: transparent; /* Removes blue overlay on tap */
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
 
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* Only transition visibility/transform, NOT the progress ring */
+    transition:
+            opacity 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+            transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+            box-shadow 0.1s ease;
 
     display: flex;
     align-items: center;
@@ -33,10 +36,9 @@
 .back-to-top.is-visible {
     opacity: 1;
     transform: translateY(0);
-    pointer-events: auto;
 }
 
-/* === THE FIX: Only apply hover effects on devices with a mouse === */
+/* Hover effects only on mouse devices */
 @media (hover: hover) {
     .back-to-top:hover {
         transform: translate(2px, 2px);
@@ -44,14 +46,11 @@
     }
 }
 
-/* Active State: Works on both Click and Touch Press */
 .back-to-top:active {
     transform: translate(4px, 4px);
     box-shadow: 0px 0px 0px #101010;
-    transition: all 0.1s ease; /* Faster transition for button press feel */
 }
 
-/* Content Wrapper */
 .btt-content {
     position: relative;
     width: 100%;
@@ -61,12 +60,12 @@
     justify-content: center;
 }
 
-/* SVG Styling */
 .btt-progress {
     transform: rotate(-90deg);
     position: absolute;
     inset: 0;
     margin: auto;
+    pointer-events: none;
 }
 
 .btt-bg-ring {
@@ -76,10 +75,9 @@
 .btt-fill-ring {
     stroke: #EF3E63;
     stroke-linecap: round;
-    transition: stroke-dashoffset 0.1s linear;
+    transition: none;
 }
 
-/* Icon Styling */
 .btt-icon {
     z-index: 1;
     display: flex;
