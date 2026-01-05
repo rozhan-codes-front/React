@@ -5,160 +5,112 @@ import '../styles/OurTeam.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
+const TEAM_MEMBERS = Array.from({ length: 20 }, (_, i) => ({
+    id: i + 1,
+    name: `عضو تیم ${i + 1}`,
+    role: i % 3 === 0 ? 'توسعه‌دهنده ارشد' : (i % 3 === 1 ? 'طراح محصول' : 'خالق رویاها'),
+    image: `https://picsum.photos/seed/creative${i * 13}/500/700`
+}));
+
 export default function OurTeam() {
     const sectionRef = useRef(null);
-    const imageRef = useRef(null);
-    const contentRef = useRef(null);
-    const cardRef = useRef(null);
+    const gridRef = useRef(null);
 
     useEffect(() => {
-        const section = sectionRef.current;
-        const image = imageRef.current;
-        const content = contentRef.current;
-        const card = cardRef.current;
+        const grid = gridRef.current;
+        if (!grid) return;
 
-        if (!section || !image || !content || !card) return;
-
-        // Use matchMedia to handle responsive animations
+        const cards = gsap.utils.toArray('.team-3d-card');
         const mm = gsap.matchMedia();
 
-        // === DESKTOP ANIMATIONS ( > 992px ) ===
+        // === DESKTOP ANIMATION (The Fun 3D Entrance) ===
         mm.add("(min-width: 993px)", () => {
-
-            // 1. PARALLAX IMAGE (Only on Desktop)
-            gsap.fromTo(image,
-                { y: '-15%' },
+            gsap.set(cards, { clearProps: 'all' });
+            gsap.fromTo(cards,
                 {
-                    y: '15%',
-                    ease: 'none',
-                    scrollTrigger: {
-                        trigger: section,
-                        start: 'top bottom',
-                        end: 'bottom top',
-                        scrub: true
-                    }
-                }
-            );
-
-            // 2. TEXT REVEAL
-            gsap.fromTo(content,
-                { y: 100, opacity: 0 },
+                    y: 120,
+                    opacity: 0,
+                    scale: 0.8,
+                    rotationX: -20
+                },
                 {
                     y: 0,
                     opacity: 1,
-                    duration: 1.2,
-                    ease: 'power3.out',
+                    scale: 1,
+                    rotationX: 0,
+                    duration: 1,
+                    stagger: 0.05,
+                    ease: 'elastic.out(1, 0.8)',
                     scrollTrigger: {
-                        trigger: section,
-                        start: 'top 75%',
+                        trigger: grid,
+                        start: 'top 85%', // Starts earlier so they don't show up late
                         toggleActions: 'play none none reverse'
                     }
                 }
             );
-
-            // 3. 3D MOUSE TILT
-            const xTo = gsap.quickTo(card, "rotationY", { duration: 0.4, ease: "power3.out" });
-            const yTo = gsap.quickTo(card, "rotationX", { duration: 0.4, ease: "power3.out" });
-
-            const onMouseMove = (e) => {
-                const { clientX, clientY } = e;
-                const { left, top, width, height } = section.getBoundingClientRect();
-                const xPos = (clientX - left) / width - 0.5;
-                const yPos = (clientY - top) / height - 0.5;
-                xTo(xPos * 15);
-                yTo(-yPos * 15);
-            };
-
-            const onMouseLeave = () => {
-                xTo(0);
-                yTo(0);
-            };
-
-            section.addEventListener('mousemove', onMouseMove);
-            section.addEventListener('mouseleave', onMouseLeave);
-
-            return () => {
-                section.removeEventListener('mousemove', onMouseMove);
-                section.removeEventListener('mouseleave', onMouseLeave);
-            };
         });
 
-        // === MOBILE CLEANUP ( <= 992px ) ===
+        // === MOBILE ANIMATION (Simple Clean Entry) ===
         mm.add("(max-width: 992px)", () => {
-            // Ensure properties are reset if resizing window
-            gsap.set(image, { y: 0 });
-            gsap.set(content, { y: 0, opacity: 1 });
-            gsap.set(card, { rotationY: 0, rotationX: 0 });
+            gsap.set(cards, { clearProps: 'all' });
+            gsap.fromTo(cards,
+                { y: 60, opacity: 0 },
+                {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.6,
+                    stagger: 0.05,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: grid,
+                        start: 'top 90%'
+                    }
+                }
+            );
         });
 
         return () => mm.revert();
-
     }, []);
 
     return (
-        <section className="our-team-section-wrapper" >
-            <header className="head">
+        <section className="our-team-creative-wrapper" ref={sectionRef}>
+            <header className="head page-container" style={{textAlign: 'center', marginBottom: '80px'}}>
                 <div className="title-group">
-                    <span className="en-title">Our Team</span>
+                    <span className="en-title">The Creators</span>
                     <h2>
                         تیم <span className="highlight">ما</span>
                     </h2>
                 </div>
                 <p className="subtitle">
-                    با تیم متخصص دی ام هاوس آشنا شوید
+                    با ۲۰ ذهن خلاق پشت پروژه‌های دی‌ام هاوس آشنا شوید
                 </p>
             </header>
 
-            <div className="our-team-section" ref={sectionRef}>
-                <div className="team-visual">
-                    <div className="team-image-wrapper">
-                        <img
-                            ref={imageRef}
-                            src="https://dmhouse.agency/wp-content/uploads/2025/12/ourTeam.jpg"
-                            alt="DMHouse Team"
-                            className="team-img"
-                        />
-                    </div>
-                    <div className="team-overlay-gradient"></div>
-                </div>
-                <div className="team-content-layer page-container" ref={contentRef}>
-                    <div className="team-glass-card" ref={cardRef}>
+            <div className="team-3d-container" ref={gridRef}>
+                {TEAM_MEMBERS.map((member) => (
+                    <div className="team-3d-card" key={member.id}>
+                        {/* Visual Layer */}
+                        <div className="t-card-visual">
+                            <div className="t-card-blob"></div>
+                            <img
+                                src={member.image}
+                                alt={member.name}
+                                className="t-card-img"
+                                loading="lazy"
+                            />
+                            <div className="t-img-overlay"></div>
+                        </div>
 
-                        <header className="team-header">
-                            <span className="team-badge">خانواده دی‌ام هاوس</span>
-                            <h2 className="team-title">
-                                خلاقیت، <br/>
-                                در کنار تخصص
-                            </h2>
-                        </header>
-
-                        <div className="team-body">
-                            <p className="team-desc">
-                                ما مجموعه‌ای از طراحان، توسعه‌دهندگان و استراتژیست‌هایی هستیم که عاشق چالش‌های دیجیتال هستند. در DMHouse، هر پروژه یک اثر هنری است که با دقت و وسواس خلق می‌شود.
-                            </p>
-
-                            <div className="team-stats-grid">
-                                <div className="t-stat">
-                                    <span className="ts-val">15+</span>
-                                    <span className="ts-label">متخصص ارشد</span>
-                                </div>
-                                <div className="t-stat">
-                                    <span className="ts-val">4</span>
-                                    <span className="ts-label">واحد تخصصی</span>
-                                </div>
-                                <div className="t-stat">
-                                    <span className="ts-val">∞</span>
-                                    <span className="ts-label">ایده خلاقانه</span>
-                                </div>
+                        {/* Info Layer */}
+                        <div className="t-card-info">
+                            <h3 className="t-name">{member.name}</h3>
+                            <span className="t-role">{member.role}</span>
+                            <div className="t-social-dots">
+                                <span></span><span></span><span></span>
                             </div>
-
-                            <a href="/about-us" className="team-btn">
-                                <span>آشنایی با اعضا</span>
-                                <span className="team-btn-icon">←</span>
-                            </a>
                         </div>
                     </div>
-                </div>
+                ))}
             </div>
         </section>
     );

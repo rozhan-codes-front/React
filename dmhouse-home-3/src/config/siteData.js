@@ -82,91 +82,71 @@ export const SITE_DATA = {
 export const HEADER_DATA = {
     brand: {
         name: "DMHouse",
-        logoUrl: "https://dmhouse.agency/wp-content/uploads/2024/06/logo2-min.png",
+        logoUrl: "https://dmhouse.agency/wp-content/uploads/2025/12/dmhouse-logo.png",
         homeLink: "/"
     },
     cta: {
         title: "دریافت مشاوره",
         href: "/consultation"
     },
-    // MEGA MENU NAVIGATION STRUCTURE
     navigation: [
         {
             id: 1,
-            title: "آژانس دیجیتال مارکتینگ",
-            href: "/digital-marketing",
+            title: "خدمات", // Single parent item
+            href: "/services",
             hasMegaMenu: true,
             columns: [
+                // Column 1: Marketing & Social
                 {
-                    title: "خدمات دیجیتال مارکتینگ",
+                    title: "دیجیتال مارکتینگ و سوشال",
                     color: "#EF3E63",
                     items: [
                         { label: "گوگل ادز", href: "/google-ads", icon: "📈" },
                         { label: "بازاریابی اینترنتی", href: "/internet-marketing", icon: "🌐" },
-                        { label: "راه اندازی کسب و کار", href: "/startup", icon: "🚀" },
-                        { label: "مشاوره دیجیتال مارکتینگ", href: "/consulting", icon: "💡" }
+                        { label: "مدیریت پیج اینستاگرام", href: "/instagram-management", icon: "❤️" },
+                        { label: "تولید محتوا", href: "/content-creation", icon: "🎥" }
                     ]
                 },
+                // Column 2: Web Design & Development
                 {
-                    title: "سوشال",
+                    title: "طراحی سایت و توسعه",
                     color: "#2E2F7E",
                     items: [
-                        { label: "سوشال مدیا", href: "/social-media", icon: "📱" },
-                        { label: "تولید محتوا اینستاگرام", href: "/content-creation", icon: "🎥" },
-                        { label: "مدیریت پیج اینستاگرام", href: "/instagram-management", icon: "❤️" }
+                        { label: "طراحی سایت شرکتی", href: "/web-design/corporate", icon: "🏢" },
+                        { label: "طراحی سایت فروشگاهی", href: "/web-design/ecommerce", icon: "🛍️" },
+                        { label: "راه اندازی استارتاپ", href: "/startup", icon: "🚀" },
+                        { label: "پشتیبانی فنی", href: "/support", icon: "🛠️" }
+                    ]
+                },
+                // Column 3: SEO & Graphics
+                {
+                    title: "سئو و گرافیک",
+                    color: "#FFD700", // Gold accent for the 3rd column
+                    items: [
+                        { label: "خدمات سئو (SEO)", href: "/seo", icon: "🔍" },
+                        { label: "بهینه سازی سرعت", href: "/speed-optimization", icon: "⚡" },
+                        { label: "طراحی رابط کاربری (UI/UX)", href: "/ui-ux", icon: "🎨" },
+                        { label: "خدمات گرافیکی", href: "/graphic-design", icon: "🖌️" }
                     ]
                 }
             ]
         },
         {
             id: 2,
-            title: "خدمات طراحی سایت",
-            href: "/web-design",
-            hasMegaMenu: true,
-            columns: [
-                {
-                    title: "خدمات دیجیتال مارکتینگ",
-                    color: "#EF3E63",
-                    items: [
-                        { label: "گوگل ادز", href: "/google-ads", icon: "📈" },
-                        { label: "بازاریابی اینترنتی", href: "/internet-marketing", icon: "🌐" },
-                        { label: "راه اندازی کسب و کار", href: "/startup", icon: "🚀" },
-                        { label: "مشاوره دیجیتال مارکتینگ", href: "/consulting", icon: "💡" }
-                    ]
-                },
-                {
-                    title: "سوشال",
-                    color: "#2E2F7E",
-                    items: [
-                        { label: "سوشال مدیا", href: "/social-media", icon: "📱" },
-                        { label: "تولید محتوا اینستاگرام", href: "/content-creation", icon: "🎥" },
-                        { label: "مدیریت پیج اینستاگرام", href: "/instagram-management", icon: "❤️" }
-                    ]
-                }
-            ]
+            title: "دی ام هاوس مارکت",
+            href: "/market",
+            hasMegaMenu: false
         },
         {
             id: 3,
-            title: "خدمات سئو",
-            href: "/seo",
+            title: "درباره ما", // Optional: Added to balance the nav
+            href: "/about",
             hasMegaMenu: false
         },
         {
             id: 4,
-            title: "خدمات گرافیکی",
-            href: "/graphic-design",
-            hasMegaMenu: false
-        },
-        {
-            id: 5,
             title: "ارتباط با ما",
             href: "/contact",
-            hasMegaMenu: false
-        },
-        {
-            id: 6,
-            title: "دی ام هاوس مارکت",
-            href: "/market",
             hasMegaMenu: false
         }
     ]

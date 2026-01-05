@@ -10,8 +10,6 @@ export default function HeroSection() {
     const contentRef = useRef(null);
     const wrapperRef = useRef(null);
     const videoRef = useRef(null);
-    const videoContainerRef = useRef(null); // Ref for the container to fade in
-    const scrollIconRef = useRef(null);     // Ref for the new scroll icon
 
     // === 1. FORCE VIDEO PLAYBACK ===
     useEffect(() => {
@@ -33,34 +31,13 @@ export default function HeroSection() {
         }
     }, []);
 
-    // === 2. GSAP ANIMATIONS & INTRO LISTENER ===
+    // === 2. GSAP ANIMATIONS ===
     useEffect(() => {
+        // We use MatchMedia to set different scroll lengths for Mobile vs Desktop
         const mm = gsap.matchMedia();
 
-        // Listen for Header animation completion
-        const onIntroComplete = () => {
-            gsap.to(videoContainerRef.current, {
-                opacity: 1,
-                duration: 1.5,
-                ease: "power2.out"
-            });
-
-            gsap.to(scrollIconRef.current, {
-                opacity: 1,
-                y: 0,
-                duration: 1,
-                delay: 0.5,
-                ease: "power2.out"
-            });
-        };
-
-        window.addEventListener('intro-complete', onIntroComplete);
-
         const ctx = gsap.context(() => {
-            // Initial states
             gsap.set(contentRef.current, { autoAlpha: 0, y: 50 });
-            gsap.set(videoContainerRef.current, { opacity: 0 }); // Start hidden
-            gsap.set(scrollIconRef.current, { opacity: 0, y: 20 }); // Start hidden
 
             mm.add({
                 isMobile: "(max-width: 768px)",
@@ -100,7 +77,6 @@ export default function HeroSection() {
         return () => {
             ctx.revert();
             mm.revert();
-            window.removeEventListener('intro-complete', onIntroComplete);
         };
     }, []);
 
@@ -114,9 +90,7 @@ export default function HeroSection() {
     return (
         <div ref={wrapperRef} className="hero-scroll-wrapper">
             <section className="heroVisual" ref={heroRef}>
-
-                {/* Updated: Added ref to container for fade-in effect */}
-                <div className="heroVisual__video-container" ref={videoContainerRef}>
+                <div className="heroVisual__video-container">
                     <video
                         ref={videoRef}
                         className="heroVisual__video"
@@ -147,15 +121,6 @@ export default function HeroSection() {
                         </h3>
                     </div>
                 </div>
-
-                {/* NEW: Animated Scroll Icon */}
-                <div className="hero-scroll-indicator" ref={scrollIconRef}>
-                    <div className="hero-scroll-icon">
-                        <div className="hero-scroll-dot"></div>
-                    </div>
-                    <span className="hero-scroll-text">اسکرول کنید</span>
-                </div>
-
             </section>
         </div>
     );

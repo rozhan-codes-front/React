@@ -5,9 +5,11 @@ export const TESTIMONIALS_DATA = [
         name: "امیر حقانی",
         role: "مدیرعامل جواهری حقانی",
         image: "https://dmhouse.agency/wp-content/uploads/2024/06/%D8%AD%D9%82%D8%A7%D9%86%DB%8C-min.png",
-        // Placeholder Logo (Replace with actual file)
         logo: "https://dmhouse.agency/wp-content/uploads/2023/09/%D8%AD%D9%82%D8%A7%D9%86%DB%8C.jpg",
-        cardColor: "#F0BBD8"
+        cardColor: "#F0BBD8",
+        // ADDED VIDEO FIELDS
+        videoUrl: "https://dmhouse.agency/wp-content/uploads/2025/12/tech.mp4",
+        videoThumb: "https://dmhouse.agency/wp-content/uploads/2024/06/%D8%AD%D9%82%D8%A7%D9%86%DB%8C-min.png"
     },
     {
         id: 2,
@@ -16,7 +18,9 @@ export const TESTIMONIALS_DATA = [
         role: "مدیر مارکتینگ یاشاگروپ",
         image: "https://dmhouse.agency/wp-content/uploads/2024/06/%D8%B3%D8%B9%DB%8C%D8%AF%DB%8C-min.png",
         logo: "https://dmhouse.agency/wp-content/uploads/2024/03/logo-14-min.png",
-        cardColor: "#BBE7F0"
+        cardColor: "#BBE7F0",
+        videoUrl: "https://dmhouse.agency/wp-content/uploads/2025/12/tech.mp4",
+        videoThumb: "https://dmhouse.agency/wp-content/uploads/2024/06/%D8%B3%D8%B9%DB%8C%D8%AF%DB%8C-min.png"
     },
     {
         id: 3,
@@ -25,7 +29,9 @@ export const TESTIMONIALS_DATA = [
         role: "مدرس و مشاور آزمون های ارشد پرستاری",
         image: "https://dmhouse.agency/wp-content/uploads/2025/12/zol.png",
         logo: "https://dmhouse.agency/wp-content/uploads/2023/05/%D8%A7%D8%B1%D8%B4%D8%AF-%D9%BE%DB%8C.jpg",
-        cardColor: "#F0EABB"
+        cardColor: "#F0EABB",
+        videoUrl: "https://dmhouse.agency/wp-content/uploads/2025/12/tech.mp4",
+        videoThumb: "https://dmhouse.agency/wp-content/uploads/2025/12/zol.png"
     },
     {
         id: 4,
@@ -34,7 +40,9 @@ export const TESTIMONIALS_DATA = [
         role: "مدیر آکادمی زبان آیلتس میکس",
         image: "https://dmhouse.agency/wp-content/uploads/2025/12/mardan.png",
         logo: "https://dmhouse.agency/wp-content/uploads/2024/01/cropped-ieltsmix-fav-icon.png",
-        cardColor: "#C3F0BB"
+        cardColor: "#C3F0BB",
+        videoUrl: "https://dmhouse.agency/wp-content/uploads/2025/12/tech.mp4",
+        videoThumb: "https://dmhouse.agency/wp-content/uploads/2025/12/mardan.png"
     },
     {
         id: 5,
@@ -43,6 +51,8 @@ export const TESTIMONIALS_DATA = [
         role: "مدیر IT شرکت فنی مهندسی JBH",
         image: "https://dmhouse.agency/wp-content/uploads/2024/06/jbh-min.png",
         logo: "https://dmhouse.agency/wp-content/uploads/2022/10/JBH.jpg",
-        cardColor: "#C3F0BB"
+        cardColor: "#C3F0BB",
+        videoUrl: "https://dmhouse.agency/wp-content/uploads/2025/12/tech.mp4",
+        videoThumb: "https://dmhouse.agency/wp-content/uploads/2024/06/jbh-min.png"
     }
 ];

@@ -1,245 +1,190 @@
-.our-team-section-wrapper {
+/* =======================
+   WRAPPER & CONTAINER
+======================= */
+.our-team-creative-wrapper {
     padding: 120px 0;
+    overflow: hidden; /* Fixes potential scrollbar issues on desktop */
+    direction: rtl;
 }
 
-/* Container: Full Width, Fixed Height */
-.our-team-section {
+/* 3D Stage */
+.team-3d-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 40px 24px;
+    padding: 20px 4vw;
+    max-width: 1600px;
+    margin: 0 auto;
+    perspective: 2000px; /* 3D Depth for Desktop */
+}
+
+/* =======================
+   THE CARD (Desktop Base)
+======================= */
+.team-3d-card {
     position: relative;
-    height: 85vh; /* Tall, immersive section */
-    min-height: 600px;
-    width: 100%;
-    overflow: hidden;
-    margin-top: 120px;
-    border-radius: 40px;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 98vw;
-    cursor: default;
+    aspect-ratio: 3 / 4.2;
+    border-radius: 24px;
+    transform-style: preserve-3d; /* Key for 3D elements */
+    cursor: pointer;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), z-index 0s;
 }
 
-.team-visual {
+/* --- DESKTOP ONLY STYLES (Min-Width 993px) --- */
+@media (min-width: 993px) {
+    /* 1. Organic Scattering (The "Fun" Look) */
+    .team-3d-card:nth-child(5n+1) { transform: rotateZ(-2deg) translateY(10px); }
+    .team-3d-card:nth-child(5n+2) { transform: rotateZ(1.5deg) translateY(-5px); }
+    .team-3d-card:nth-child(5n+3) { transform: rotateZ(-1deg) translateY(15px); z-index: 2; }
+    .team-3d-card:nth-child(5n+4) { transform: rotateZ(2.5deg) translateY(-10px); }
+    .team-3d-card:nth-child(5n+0) { transform: rotateZ(-1.5deg); }
+
+    /* 2. Hover Levitation */
+    .team-3d-card:hover {
+        transform: translateZ(60px) rotateZ(0deg) scale(1.05); /* Lift Up */
+        z-index: 100;
+    }
+
+    /* 3. Info Card Hinge Reveal (Hidden by default) */
+    .t-card-info {
+        transform-origin: bottom center;
+        transform: translateZ(30px) rotateX(90deg); /* Folded Down */
+        opacity: 0;
+        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .team-3d-card:hover .t-card-info {
+        opacity: 1;
+        transform: translateZ(40px) rotateX(0deg); /* Flip Up */
+    }
+
+    /* 4. Image Grayscale to Color */
+    .team-3d-card { filter: grayscale(100%) contrast(0.95); transition: filter 0.6s ease, transform 0.6s ease; }
+    .team-3d-card:hover { filter: grayscale(0%) contrast(1); }
+
+    /* 5. Blob Animation */
+    .t-card-blob {
+        transform: translate(-50%, -50%) translateZ(-20px) scale(0.8);
+        opacity: 0;
+        transition: all 0.6s ease;
+    }
+    .team-3d-card:hover .t-card-blob {
+        opacity: 0.4;
+        transform: translate(-50%, -50%) translateZ(-30px) scale(1.1);
+    }
+}
+
+/* =======================
+   SHARED VISUALS
+======================= */
+.t-card-visual {
     position: absolute;
     inset: 0;
-    z-index: 0;
+    border-radius: 24px;
     overflow: hidden;
-    border-radius: 40px;
-    pointer-events: none;
+    transform: translateZ(1px);
+    background: #fff;
+    border: 4px solid #fff;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
 }
 
-.team-image-wrapper {
-    position: absolute;
-    top: -20%;
-    left: 0;
-    width: 100%;
-    height: 140%;
-    will-change: transform;
-}
-
-.team-img {
+.t-card-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 30%;
-    filter: brightness(0.7) contrast(1.1) grayscale(0.2);
+    transition: transform 0.8s ease;
 }
 
-.team-overlay-gradient {
+.team-3d-card:hover .t-card-img { transform: scale(1.1); }
+
+.t-img-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-            250deg,
-            rgba(0,0,0,0) 0%,
-            rgba(0,0,0,0.3) 50%,
-            rgba(10, 20, 40, 0.55) 100%
-    );
-    z-index: 1;
+    background: linear-gradient(to top, rgba(1, 2, 78, 0.8) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.team-3d-card:hover .t-img-overlay { opacity: 1; }
+
+.t-card-blob {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 120%;
+    height: 120%;
+    background: linear-gradient(135deg, #EF3E63, #8e44ad);
+    filter: blur(40px);
+    border-radius: 50%;
+    z-index: -1;
 }
 
-/* 2. Content Layer - THE 3D STAGE */
-.team-content-layer {
-    position: relative;
-    z-index: 2;
-    height: 100%;
-    display: flex;
-    align-items: flex-end; /* Align card to bottom */
-    padding-bottom: 80px;
-    perspective: 1200px;
-    transform-style: preserve-3d;
-}
-
-/* 3. Glass Card Design - THE 3D OBJECT */
-.team-glass-card {
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    padding: 48px 56px;
-    border-radius: 32px;
-    max-width: 600px;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    box-shadow:
-            0 40px 80px rgba(0,0,0,0.5),
-            inset 0 1px 1px rgba(255,255,255,0.2);
-    transform-style: preserve-3d;
-    will-change: transform;
-}
-
-.team-header { transform: translateZ(40px); }
-.team-body { transform: translateZ(20px); }
-.team-stats-grid { transform: translateZ(50px); }
-
-/* Typography & Elements */
-.team-badge {
-    display: inline-block;
-    background: rgba(255,255,255,0.1);
-    padding: 6px 16px;
-    border-radius: 50px;
-    font-size: 13px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    color: var(--primary, #EF3E63);
-    border: 1px solid rgba(255,255,255,0.1);
-    backdrop-filter: blur(5px);
-}
-
-.team-title {
-    font-size: 48px;
-    line-height: 1.1;
-    font-weight: 900;
-    margin: 0;
-    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.team-desc {
-    font-size: 16px;
-    line-height: 1.8;
-    opacity: 0.85;
-    margin-bottom: 10px;
-    max-width: 90%;
-}
-
-.team-stats-grid {
-    display: flex;
-    gap: 48px;
-    padding: 24px 0;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    margin-bottom: 16px;
-    background: rgba(0,0,0,0.2);
+/* =======================
+   INFO CARD (Base)
+======================= */
+.t-card-info {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
     border-radius: 16px;
-    justify-content: center;
+    color: #01024E;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
 }
 
-.t-stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-}
+.t-name { margin: 0 0 4px 0; font-size: 18px; font-weight: 900; }
+.t-role { font-size: 12px; color: #EF3E63; font-weight: 700; text-transform: uppercase; }
 
-.ts-val {
-    font-size: 36px;
-    font-weight: 800;
-    color: #fff;
-    text-shadow: 0 0 20px rgba(239, 62, 99, 0.6);
-}
+.t-social-dots { display: flex; gap: 6px; margin-top: 10px; justify-content: center; }
+.t-social-dots span { width: 6px; height: 6px; background: #01024E; border-radius: 50%; opacity: 0.2; transition: 0.3s; }
+.team-3d-card:hover .t-social-dots span { opacity: 1; }
 
-.ts-label {
-    font-size: 12px;
-    opacity: 0.6;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.team-btn {
-    align-self: flex-start;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: #fff;
-    color: #000;
-    padding: 16px 32px;
-    border-radius: 16px;
-    text-decoration: none;
-    font-weight: 800;
-    font-size: 15px;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-    transform: translateZ(30px);
-}
-
-.team-btn:hover {
-    transform: translateZ(35px) translateY(-3px);
-    box-shadow: 0 10px 20px rgba(255,255,255,0.2);
-}
-
-.team-btn-icon {
-    font-size: 18px;
-    transition: transform 0.3s ease;
-}
-
-.team-btn:hover .team-btn-icon {
-    transform: translateX(-5px);
-}
-
+/* =======================
+   MOBILE FIXES (<= 992px)
+======================= */
 @media (max-width: 992px) {
-    .our-team-section-wrapper {
-        padding: 80px 0;
-    }
-    .our-team-section {
-        height: auto;
-        min-height: auto;
-        margin-top: 80px;
-        border-radius: 0;
-        max-width: 100%;
-        margin-bottom: 0;
+    .our-team-creative-wrapper {
+        padding: 60px 0;
     }
 
-    .team-visual {
-        position: relative;
-        margin: 0 8px;
-        height: 400px;
-        overflow: hidden;
+    .team-3d-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 Columns */
+        gap: 20px 15px;
+        padding: 0 16px;
+        perspective: none; /* Disable 3D depth to prevent overflow */
     }
 
-    .team-image-wrapper {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        transform: none !important;
+    .team-3d-card {
+        transform: none !important; /* Force flat layout (removes scattering) */
+        filter: grayscale(0%); /* Full color always */
+        aspect-ratio: 3/4.5;
     }
 
-    .team-img {
-        height: 100%;
-        width: 100%;
-        object-fit: cover;
-    }
-
-    .team-content-layer {
-        padding: 0;
-        margin-top: -60px; /* Overlap effect */
-        perspective: none;
-    }
-
-    .team-glass-card {
-        background: #101018;
-        backdrop-filter: none;
-        margin: -75px 20px 40px;
-        border-radius: 24px;
-        padding: 32px;
+    /* Disable hover transform that causes scroll overflow */
+    .team-3d-card:hover {
         transform: none !important;
         box-shadow: none;
     }
 
-    .team-header, .team-body, .team-stats-grid, .team-btn {
-        transform: none !important;
+    .t-card-visual {
+        transform: none; /* Flatten */
+        border-width: 2px;
     }
 
-    .team-title { font-size: 32px; }
-    .team-stats-grid { gap: 24px; }
-    .ts-val { font-size: 28px; }
+    /* Force Info Card to be visible always */
+    .t-card-info {
+        opacity: 1 !important;
+        transform: none !important;
+        bottom: 8px; left: 8px; right: 8px;
+        padding: 10px;
+    }
+
+    .t-img-overlay { opacity: 0.3; } /* Mild overlay for contrast */
+    .t-card-blob { display: none; } /* Hide heavy blur effect on mobile */
+    .t-social-dots span { opacity: 1; }
+
+    .t-name { font-size: 14px; }
+    .t-role { font-size: 10px; }
 }
