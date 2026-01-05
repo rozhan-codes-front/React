@@ -1,0 +1,329 @@
+/* ======================================================
+   SUCCESS SECTION (Revised)
+====================================================== */
+.success-story {
+    padding: 100px 0 140px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* CAROUSEL WRAPPER */
+.success-carousel-wrapper {
+    position: relative;
+    z-index: 2;
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+/* The Container */
+.success-carousel {
+    position: relative;
+    width: min(1300px, 94vw);
+    height: 600px; /* Desktop Fixed Height */
+    perspective: 2000px;
+}
+
+.success-cards {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    touch-action: pan-y;
+}
+
+/* =========================
+   THE CARD
+========================= */
+.success-card {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr; /* Desktop: Image Left, Content Right */
+
+    background: #ffffff;
+    border-radius: 32px;
+    box-shadow: 0 20px 50px rgba(1, 2, 78, 0.08);
+    border: 1px solid rgba(1, 2, 78, 0.05);
+
+    will-change: transform, opacity;
+    transform-style: preserve-3d;
+
+    /* Inactive State */
+    transform: translateX(20%) translateZ(-150px) rotateY(-8deg);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+    overflow: hidden;
+}
+
+.success-card.is-active {
+    transform: translateX(0) translateZ(0) rotateY(0);
+    opacity: 1;
+    z-index: 10;
+    pointer-events: auto;
+}
+
+.success-card.is-next {
+    transform: translateX(6%) translateZ(-120px) rotateY(-4deg);
+    opacity: 1;
+    z-index: 5;
+    filter: brightness(0.96);
+}
+
+/* Visuals */
+.success-card__visual {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+    background: #f0f2f5;
+    border-left: 1px solid rgba(0,0,0,0.03);
+}
+
+.visual-backdrop {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(240,242,245,0) 60%);
+    opacity: 0.6;
+}
+
+.success-card__visual img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: top center;
+    transition: transform 0.8s ease;
+}
+
+.success-card.is-active .success-card__visual img {
+    transform: scale(1.05);
+}
+
+/* Content */
+.success-card__content {
+    padding: 56px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fff;
+    position: relative;
+    direction: rtl; /* Ensure Internal Content is RTL */
+}
+
+/* Meta */
+.sc-meta { margin-bottom: 32px; }
+
+.sc-badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #EF3E63;
+    margin-bottom: 12px;
+    position: relative;
+    padding-left: 40px;
+}
+.sc-badge::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 30px;
+    height: 2px;
+    background: #EF3E63;
+}
+
+.sc-title {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 900;
+    color: #01024E;
+    line-height: 1.2;
+}
+
+/* Metrics */
+.sc-metric-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+}
+
+.sc-metric-val {
+    font-size: 64px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+
+/* Gradients */
+.text-gradient-gold { background: linear-gradient(135deg, #01024E 30%, #EF3E63 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.text-gradient-blue { background: linear-gradient(135deg, #2E2F7E 0%, #3498db 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.text-gradient-purple { background: linear-gradient(135deg, #8e44ad 0%, #EF3E63 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+.sc-metric-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.sc-metric-unit { font-size: 18px; font-weight: 800; color: #01024E; }
+.sc-metric-label { font-size: 13px; color: #6c757d; font-weight: 500; }
+
+/* Comparison Grid */
+.sc-comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid #eee;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.sc-compare-box {
+    padding: 16px 20px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+.sc-compare-box.is-danger { background: #fff5f7; border-right: 4px solid #EF3E63; }
+.sc-compare-box.is-success { background: #f0fdf4; border-left: 4px solid #27ae60; }
+
+.sc-cp-label { font-size: 11px; text-transform: uppercase; color: #888; font-weight: 700; margin-bottom: 4px; }
+.sc-cp-val { font-size: 14px; font-weight: 700; color: #01024E; }
+
+/* =========================
+   CONTROLS (RTL FRIENDLY)
+========================= */
+.success-controls {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+
+    display: flex;
+    flex-direction: row-reverse; /* Flip order for RTL context if needed, or just manual order */
+    align-items: center;
+
+    background: #fff;
+    padding: 6px 10px;
+    border-radius: 99px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.nav-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    color: #01024E;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 18px;
+    border-radius: 99px;
+    transition: all 0.2s;
+    font-family: 'Dana';
+}
+
+.nav-btn:hover { background: #f4f6f8; color: #EF3E63; }
+.nav-btn span { font-weight: 800; font-size: 14px; font-family: inherit; }
+
+.nav-divider { width: 1px; height: 20px; background: #eee; margin: 0 2px; }
+
+/* =========================
+   RESPONSIVE (Fixed & Aligned)
+========================= */
+@media (max-width: 992px) {
+    .success-carousel {
+        /* Mobile: Increase height to fit vertical stack */
+        height: auto;
+        min-height: 850px;
+        perspective: none;
+        width: 100%;
+        padding: 0 20px;
+    }
+
+    .success-card {
+        /* Switch grid to Flex Column */
+        display: flex;
+        flex-direction: column;
+
+        /* Ensure card fills area but keeps spacing */
+        bottom: 80px; /* Leave space for controls */
+        border-radius: 24px;
+
+        /* Reset Transforms for mobile to avoid alignment issues */
+        transform: none !important;
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: 0;
+    }
+
+    .success-card.is-active {
+        opacity: 1;
+        z-index: 2;
+    }
+
+    /* Hide non-active cards completely on mobile to prevent overflow/scroll issues */
+    .success-card:not(.is-active) {
+        display: none;
+    }
+
+    .success-card__visual {
+        flex: 0 0 280px; /* Fixed height for image */
+        width: 100%;
+        border-left: none;
+        border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .success-card__content {
+        flex: 1;
+        padding: 32px 24px 24px 24px;
+        text-align: center;
+        align-items: center;
+    }
+
+    /* Adjust alignments for mobile center look */
+    .sc-badge { padding-left: 0; margin-bottom: 8px; }
+    .sc-badge::before { display: none; }
+
+    .sc-title { font-size: 26px; margin-bottom: 16px; }
+
+    .sc-metric-wrapper {
+        flex-direction: column;
+        gap: 4px;
+        margin-bottom: 24px;
+    }
+
+    .sc-metric-val { font-size: 52px; }
+    .sc-metric-info { align-items: center; }
+
+    .sc-comparison-grid {
+        width: 100%;
+        grid-template-columns: 1fr; /* Stack comparison */
+        text-align: right; /* Keep text reading RTL */
+    }
+
+    .sc-compare-box {
+        border-left: none !important;
+        border-right: 4px solid;
+        padding: 12px 16px;
+    }
+
+    /* Fix Mobile Controls */
+    .success-controls {
+        bottom: 0px; /* Stick to bottom of container */
+        width: auto;
+        min-width: 280px;
+        justify-content: space-between;
+    }
+}

@@ -1,0 +1,245 @@
+.our-team-section-wrapper {
+    padding: 120px 0;
+}
+
+/* Container: Full Width, Fixed Height */
+.our-team-section {
+    position: relative;
+    height: 85vh; /* Tall, immersive section */
+    min-height: 600px;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 120px;
+    border-radius: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 98vw;
+    cursor: default;
+}
+
+.team-visual {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: 40px;
+    pointer-events: none;
+}
+
+.team-image-wrapper {
+    position: absolute;
+    top: -20%;
+    left: 0;
+    width: 100%;
+    height: 140%;
+    will-change: transform;
+}
+
+.team-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    filter: brightness(0.7) contrast(1.1) grayscale(0.2);
+}
+
+.team-overlay-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+            250deg,
+            rgba(0,0,0,0) 0%,
+            rgba(0,0,0,0.3) 50%,
+            rgba(10, 20, 40, 0.55) 100%
+    );
+    z-index: 1;
+}
+
+/* 2. Content Layer - THE 3D STAGE */
+.team-content-layer {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: flex-end; /* Align card to bottom */
+    padding-bottom: 80px;
+    perspective: 1200px;
+    transform-style: preserve-3d;
+}
+
+/* 3. Glass Card Design - THE 3D OBJECT */
+.team-glass-card {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 48px 56px;
+    border-radius: 32px;
+    max-width: 600px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    box-shadow:
+            0 40px 80px rgba(0,0,0,0.5),
+            inset 0 1px 1px rgba(255,255,255,0.2);
+    transform-style: preserve-3d;
+    will-change: transform;
+}
+
+.team-header { transform: translateZ(40px); }
+.team-body { transform: translateZ(20px); }
+.team-stats-grid { transform: translateZ(50px); }
+
+/* Typography & Elements */
+.team-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.1);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--primary, #EF3E63);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(5px);
+}
+
+.team-title {
+    font-size: 48px;
+    line-height: 1.1;
+    font-weight: 900;
+    margin: 0;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.team-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    opacity: 0.85;
+    margin-bottom: 10px;
+    max-width: 90%;
+}
+
+.team-stats-grid {
+    display: flex;
+    gap: 48px;
+    padding: 24px 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 16px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 16px;
+    justify-content: center;
+}
+
+.t-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.ts-val {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    text-shadow: 0 0 20px rgba(239, 62, 99, 0.6);
+}
+
+.ts-label {
+    font-size: 12px;
+    opacity: 0.6;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.team-btn {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    color: #000;
+    padding: 16px 32px;
+    border-radius: 16px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 15px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transform: translateZ(30px);
+}
+
+.team-btn:hover {
+    transform: translateZ(35px) translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255,255,255,0.2);
+}
+
+.team-btn-icon {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.team-btn:hover .team-btn-icon {
+    transform: translateX(-5px);
+}
+
+@media (max-width: 992px) {
+    .our-team-section-wrapper {
+        padding: 80px 0;
+    }
+    .our-team-section {
+        height: auto;
+        min-height: auto;
+        margin-top: 80px;
+        border-radius: 0;
+        max-width: 100%;
+        margin-bottom: 0;
+    }
+
+    .team-visual {
+        position: relative;
+        margin: 0 8px;
+        height: 400px;
+        overflow: hidden;
+    }
+
+    .team-image-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        transform: none !important;
+    }
+
+    .team-img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .team-content-layer {
+        padding: 0;
+        margin-top: -60px; /* Overlap effect */
+        perspective: none;
+    }
+
+    .team-glass-card {
+        background: #101018;
+        backdrop-filter: none;
+        margin: -75px 20px 40px;
+        border-radius: 24px;
+        padding: 32px;
+        transform: none !important;
+        box-shadow: none;
+    }
+
+    .team-header, .team-body, .team-stats-grid, .team-btn {
+        transform: none !important;
+    }
+
+    .team-title { font-size: 32px; }
+    .team-stats-grid { gap: 24px; }
+    .ts-val { font-size: 28px; }
+}
