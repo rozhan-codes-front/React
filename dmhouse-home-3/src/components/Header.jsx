@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import { HEADER_DATA } from '../config/siteData';
 import gsap from 'gsap';
+import ConsultationModal from './ConsultationModal';
 import '../styles/Header.css';
 
 // === CONFIGURATION ===
@@ -18,8 +19,9 @@ export default function Header() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [activeMobileSub, setActiveMobileSub] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
 
-    // Animation Refs
+    // Refs
     const preloaderRef = useRef(null);
     const preloaderLogoRef = useRef(null);
     const headerLogoRef = useRef(null);
@@ -27,12 +29,9 @@ export default function Header() {
     const actionsRef = useRef(null);
     const headerRef = useRef(null);
 
-    // === INTRO ANIMATION SEQUENCE ===
-    // === INTRO ANIMATION SEQUENCE ===
-    // === INTRO ANIMATION SEQUENCE ===
+    // === ANIMATION SEQUENCE ===
     useLayoutEffect(() => {
         let xDiff = 0, yDiff = 0, scaleDiff = 1;
-
         const ctx = gsap.context(() => {
             const tl = gsap.timeline({
                 onComplete: () => {
@@ -42,96 +41,47 @@ export default function Header() {
                 }
             });
 
-            // 1. Initial State
-            // FIX: Force header to y:0 immediately so calculations are correct (removes the jump)
-            gsap.set('.site-header', { y: 0 });
+            gsap.set('.site-header', { y: 0, opacity: 1 });
             gsap.set(headerLogoRef.current, { autoAlpha: 0 });
-            gsap.set([navRef.current, actionsRef.current], { autoAlpha: 0, x: 60 });
+            gsap.set([navRef.current, actionsRef.current], { autoAlpha: 0, y: -20 });
             gsap.set('.scroll-indicator', { autoAlpha: 0, y: 20 });
+            gsap.set('.preloader-ripple', { clipPath: "circle(0% at 50% 50%)" });
+            gsap.set('.holographic-field', { scale: 1.5, rotation: 0 });
 
-            // 2. Preloader Wait Phase
-            tl.to({}, { duration: 2.5 });
+            tl.to({}, { duration: 2.0 });
 
-            // --- CALCULATION STEP ---
-            // Now that header is at y:0, this will calculate the REAL destination
             tl.call(() => {
                 if (preloaderLogoRef.current && headerLogoRef.current) {
                     const startRect = preloaderLogoRef.current.getBoundingClientRect();
                     const endRect = headerLogoRef.current.getBoundingClientRect();
-
                     xDiff = (endRect.left + endRect.width / 2) - (startRect.left + startRect.width / 2);
                     yDiff = (endRect.top + endRect.height / 2) - (startRect.top + startRect.height / 2);
                     scaleDiff = endRect.width / startRect.width;
                 }
-            }, null, "colorPhase");
+            }, null, "calc");
 
-            // 3. COLOR PHASE (Ripple)
-            tl.to('.preloader-blob', { opacity: 0, duration: 0.5, scale: 0.5 }, "colorPhase");
-            tl.to('.preloader-ripple', {
-                scale: 150,
-                duration: 1.2,
-                ease: "expo.inOut"
-            }, "colorPhase");
+            tl.addLabel("implode");
+            tl.to('.preloader-blob', { scale: 0, opacity: 0, x: 0, y: 0, duration: 0.4, ease: "back.in(2)", stagger: 0 }, "implode");
+            tl.to(preloaderLogoRef.current, { scale: 0.85, duration: 0.3, ease: "power2.out" }, "implode");
 
-            // Only animate opacity now (y is already 0)
-            gsap.to('.site-header', { opacity: 1, duration: 0.1 }, "colorPhase");
+            tl.addLabel("explode", ">");
+            tl.to('.preloader-ripple', { clipPath: "circle(150% at 50% 50%)", duration: 1.6, ease: "power4.inOut" }, "explode");
+            tl.to('.holographic-field', { scale: 1, duration: 1.6, ease: "power4.inOut" }, "explode");
+            tl.to(preloaderLogoRef.current, { x: () => xDiff, y: () => yDiff, scale: () => scaleDiff, duration: 1.6, ease: "power4.inOut" }, "explode");
 
-            // 4. MOVE PHASE
-            tl.addLabel("moveStart", "colorPhase+=0.5");
-
-            tl.to(preloaderLogoRef.current, {
-                x: () => xDiff,
-                y: () => yDiff,
-                scale: () => scaleDiff,
-                rotation: 0.01,
-                transformOrigin: "50% 50%",
-                duration: 1.0,
-                ease: "power4.inOut"
-            }, "moveStart");
-
-            // 5. HANDOFF & POP
             tl.add(() => {
                 gsap.set(headerLogoRef.current, { autoAlpha: 1 });
                 gsap.set(preloaderLogoRef.current, { autoAlpha: 0 });
-                gsap.to(headerLogoRef.current, {
-                    keyframes: [
-                        { scale: 1.15, duration: 0.15, ease: "sine.out" },
-                        { scale: 1, duration: 0.8, ease: "elastic.out(1, 0.3)" }
-                    ]
-                });
+                gsap.to(headerLogoRef.current, { keyframes: [{ scale: 1.15, duration: 0.2, ease: "sine.out" }, { scale: 1, duration: 0.8, ease: "elastic.out(1, 0.4)" }] });
             });
 
-            // 6. REVEAL BACKGROUND
-            tl.to('.preloader-ripple', {
-                opacity: 0,
-                duration: 0.6,
-                ease: "power2.inOut"
-            }, "moveStart+=0.5");
-
-            tl.to(preloaderRef.current, { backgroundColor: 'transparent' }, "moveStart+=0.5");
-
-            // 7. Nav & Actions Entry
-            tl.to([navRef.current, actionsRef.current], {
-                autoAlpha: 1,
-                x: 0,
-                duration: 1.2,
-                stagger: 0.15,
-                ease: "power3.out"
-            }, "-=0.5");
-
-            tl.to('.scroll-indicator', {
-                autoAlpha: 1,
-                y: 0,
-                duration: 0.8,
-                ease: "power2.out"
-            }, "-=1.0");
-
+            tl.to(preloaderRef.current, { autoAlpha: 0, duration: 0.6 }, "+=0.1");
+            tl.to([navRef.current, actionsRef.current], { autoAlpha: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "back.out(1.2)" }, "-=0.3");
+            tl.to('.scroll-indicator', { autoAlpha: 1, y: 0, duration: 0.8, ease: "power2.out" }, "-=0.7");
         }, headerRef);
-
         return () => ctx.revert();
     }, []);
 
-    // ... (SCROLL LOGIC - UNCHANGED) ...
     useEffect(() => {
         const handleScroll = () => {
             const currentScroll = window.scrollY;
@@ -142,7 +92,6 @@ export default function Header() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // ... (MOBILE MENU LOGIC - UNCHANGED) ...
     useEffect(() => {
         if (mobileMenuOpen) {
             document.body.style.overflow = 'hidden';
@@ -157,22 +106,31 @@ export default function Header() {
     const handleLinkClick = () => setMobileMenuOpen(false);
     const toggleMobileSub = (id) => setActiveMobileSub(prev => (prev === id ? null : id));
 
+    const handleOpenConsultation = (e) => {
+        e.preventDefault();
+        setModalOpen(!modalOpen);
+        setMobileMenuOpen(false);
+    };
+
     return (
         <div ref={headerRef}>
             {/* === PRELOADER === */}
             <div className="site-preloader" ref={preloaderRef}>
                 <div className="preloader-center">
-                    {/* ADDED RIPPLE ELEMENT HERE */}
-                    <div className="preloader-ripple"></div>
-
-                    <div className="preloader-blob blob-1"></div>
-                    <div className="preloader-blob blob-2"></div>
-                    <div className="preloader-blob blob-3"></div>
+                    <div className="preloader-ripple">
+                        {/* CHANGED: Removed scanline overlay, just the field remains */}
+                        <div className="holographic-field"></div>
+                    </div>
+                    <div className="blobs-container">
+                        <div className="preloader-blob blob-1"></div>
+                        <div className="preloader-blob blob-2"></div>
+                        <div className="preloader-blob blob-3"></div>
+                    </div>
                     <img ref={preloaderLogoRef} src={brand.logoUrl} alt="Loading..." className="preloader-logo" style={{ willChange: 'transform' }} />
                 </div>
             </div>
 
-            {/* === MAIN HEADER (Rest is Unchanged) === */}
+            {/* === MAIN HEADER === */}
             <header className={`site-header ${showBottomBar ? 'is-hidden' : ''} ${isLoaded ? 'is-loaded' : ''}`}>
                 <div className="header-glass">
                     <nav className="header-nav-desktop" ref={navRef}>
@@ -214,7 +172,7 @@ export default function Header() {
                     </a>
 
                     <div className="header-actions" ref={actionsRef}>
-                        <a href={cta.href} className="header-cta primary-btn">
+                        <a href={cta.href} className="header-cta primary-btn" onClick={handleOpenConsultation}>
                             <span>{cta.title}</span>
                             <div className="cta-mask"><div className="cta-shine"></div></div>
                             <span className="cta-icon-phone">📞</span>
@@ -232,7 +190,7 @@ export default function Header() {
                 </div>
             </div>
 
-            {/* === MOBILE MENU (Unchanged) === */}
+            {/* === MOBILE MENU === */}
             <div className={`mobile-menu-overlay ${mobileMenuOpen ? 'is-open' : ''}`} onClick={() => setMobileMenuOpen(false)}>
                 <div className="mobile-menu-content" onClick={(e) => e.stopPropagation()}>
                     <div className="mobile-menu-header">
@@ -268,22 +226,30 @@ export default function Header() {
                         ))}
                     </nav>
                     <div className="mobile-menu-footer">
-                        <a href={cta.href} className="mobile-cta-btn" onClick={handleLinkClick}>{cta.title}</a>
+                        <a href={cta.href} className="mobile-cta-btn" onClick={handleOpenConsultation}>{cta.title}</a>
                     </div>
                 </div>
             </div>
 
-            {/* === BOTTOM BAR (Unchanged) === */}
+            {/* === BOTTOM STICKY BAR === */}
             <div className={`bottom-sticky-wrapper ${showBottomBar ? 'is-visible' : ''}`}>
                 <div className="bottom-glass">
                     <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}>
                         <img src={brand.logoUrl} alt="Logo" className="bottom-logo" />
                     </a>
-                    <a href={cta.href} className="bottom-cta primary-btn">
-                        <span>{cta.title}</span>
-                        <div className="cta-mask"><div className="cta-shine"></div></div>
-                        <span className="bottom-cta-icon"><img src="https://dmhouse.agency/wp-content/uploads/2025/12/left-white.svg" alt="Arrow" style={{ width: '24px', height: 'auto' }} /></span>
-                    </a>
+
+                    <div className="cta-anchor-wrapper" style={{ position: 'relative' }}>
+                        <ConsultationModal
+                            isOpen={modalOpen}
+                            onClose={() => setModalOpen(false)}
+                        />
+
+                        <a href={cta.href} className="bottom-cta primary-btn" onClick={handleOpenConsultation}>
+                            <span>{cta.title}</span>
+                            <div className="cta-mask"><div className="cta-shine"></div></div>
+                            <span className="bottom-cta-icon"><img src="https://dmhouse.agency/wp-content/uploads/2025/12/left-white.svg" alt="Arrow" style={{ width: '24px', height: 'auto' }} /></span>
+                        </a>
+                    </div>
                 </div>
                 {VIDEO_WIDGET_DATA.show && (
                     <a href={VIDEO_WIDGET_DATA.link} className="bottom-video-widget">

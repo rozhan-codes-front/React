@@ -1,0 +1,167 @@
+/* Container anchored to the button wrapper */
+.consult-bubble-container {
+    position: absolute;
+    bottom: 100%; /* Sits directly on top */
+    left: 0; /* Aligns left edge with button */
+    margin-bottom: 18px; /* Space for the tail */
+    width: 300px;
+
+    background: #fff;
+    border-radius: 24px;
+    border-bottom-left-radius: 4px; /* Corner effect */
+    padding: 32px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(0, 0, 0, 0.03);
+
+    z-index: 10000;
+    direction: rtl;
+    display: none; /* Controlled by GSAP */
+    pointer-events: auto;
+}
+
+/* The Tail */
+.bubble-tail {
+    position: absolute;
+    bottom: -10px;
+    left: 24px;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    border-radius: 50%; /* Soft nub */
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.05);
+    z-index: -1;
+}
+
+/* Close Button */
+.consult-close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 24px;
+    height: 25px;
+    border-radius: 50%;
+    background: #f0f0f5;
+    border: none;
+    color: #999;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.consult-close-btn:hover {
+    background: #EF3E63;
+    color: #fff;
+}
+
+/* Header */
+.consult-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    text-align: right;
+}
+
+.consult-emoji {
+    font-size: 22px;
+    background: #fff0f3;
+    width: 48px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.consult-header h3 {
+    font-size: 16px;
+    font-weight: 800;
+    color: #01024E;
+    margin: 0 0 4px 0;
+}
+
+.consult-header p {
+    font-size: 11px;
+    color: #888;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Form */
+.consult-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.compact-input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 2px solid #f2f2f7;
+    background: #f9f9fc;
+    font-size: 13px;
+    font-family: inherit;
+    transition: all 0.2s;
+    outline: none;
+}
+
+.compact-input:focus {
+    border-color: #EF3E63;
+    background: #fff;
+}
+
+.consult-submit-btn {
+    font-family: 'Dana';
+    margin-top: 4px;
+    padding: 12px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #EF3E63 0%, #ff6b8b 100%);
+    border: none;
+    color: #fff;
+    font-weight: 800;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.consult-submit-btn:hover {
+    transform: scale(1.02);
+}
+
+/* Success View */
+.consult-success-view {
+    text-align: center;
+    padding: 10px;
+}
+
+.success-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.consult-success-view h3 {
+    font-size: 18px;
+    margin: 0 0 5px 0;
+    color: #01024E;
+}
+
+.consult-success-view p {
+    font-size: 12px;
+    color: #666;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .consult-bubble-container {
+        width: 280px;
+        left: -100px;
+    }
+    .bubble-tail {
+        left: 124px;
+    }
+}

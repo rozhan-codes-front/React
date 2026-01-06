@@ -34,15 +34,6 @@ export default function SeoContentSection() {
 
     return (
         <section className="seo-section page-container">
-            <header className="head">
-                <h2>
-                    <span className="highlight">دانش</span> و استراتژی
-                </h2>
-                <p className="subtitle">
-                    مروری بر اصول و استراتژی‌هایی که ما برای رشد کسب‌وکار شما به کار می‌گیریم.
-                </p>
-            </header>
-
             {/* Global Wrapper that controls height */}
             <div className={`seo-global-wrapper ${isExpanded ? 'is-expanded' : 'is-collapsed'}`}>
 

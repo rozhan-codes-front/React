@@ -87,7 +87,7 @@ export const HEADER_DATA = {
     },
     cta: {
         title: "دریافت مشاوره",
-        href: "/consultation"
+        href: "#"
     },
     navigation: [
         {
