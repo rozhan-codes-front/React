@@ -306,7 +306,7 @@
 }
 
 /* ======================================================
-   PRELOADER (Solid Fill from Blobs)
+   PRELOADER (Liquid Fusion - Visible)
 ====================================================== */
 
 .site-preloader {
@@ -338,31 +338,24 @@
     display: block;
 }
 
-/* THE PORTAL MASK */
+/* PORTAL MASK */
 .preloader-ripple {
     position: fixed;
     inset: 0;
-    z-index: 15; /* Behind logo, above blobs */
-    /* Start closed */
+    z-index: 15;
     clip-path: circle(0% at 50% 50%);
     will-change: clip-path;
 }
 
-/* THE FIELD - Now a Solid Color */
+/* SOLID FIELD */
 .holographic-field {
     position: absolute;
-    inset: -50%;
-
-    /* CHANGED: Solid primary color (same as blobs) */
+    inset: -100%;
     background-color: #EF3E63;
-
-    /* Removed gradients/blend modes */
     will-change: transform;
 }
 
-/* Removed .scanline-overlay as it is no longer used */
-
-/* Blobs Container */
+/* BLOBS CONTAINER */
 .blobs-container {
     position: absolute;
     inset: 0;
@@ -379,53 +372,112 @@
     will-change: transform, border-radius;
 }
 
-/* BLOB STYLES (Unchanged from your snippet) */
 .blob-1 {
-    width: 60px; height: 60px;
-    background: #EF3E63;
-    margin-top: -30px; margin-left: -30px;
-    animation: jitter-1 1.2s infinite ease-in-out alternate;
-    animation-delay: 0s;
-}
-
-.blob-2 {
     width: 65px; height: 65px;
     background: #EF3E63;
     margin-top: -32.5px; margin-left: -32.5px;
-    animation: jitter-2 1.3s infinite ease-in-out alternate;
+    animation: visible-fuse-1 1.6s infinite ease-in-out alternate;
+}
+
+/* 2. Top-Left */
+.blob-2 {
+    width: 70px; height: 70px;
+    background: #EF3E63;
+    margin-top: -35px; margin-left: -35px;
+    animation: visible-fuse-2 1.4s infinite ease-in-out alternate;
     animation-delay: -0.2s;
 }
 
+/* 3. Bottom (Straight Down) */
 .blob-3 {
-    width: 55px; height: 55px;
+    width: 60px; height: 60px;
     background: #EF3E63;
-    margin-top: -27.5px; margin-left: -27.5px;
-    animation: jitter-3 1.1s infinite ease-in-out alternate;
+    margin-top: -30px; margin-left: -30px;
+    animation: visible-fuse-3 1.8s infinite ease-in-out alternate;
     animation-delay: -0.5s;
 }
 
-/* BLOB ANIMATIONS (Unchanged from your snippet) */
-@keyframes jitter-1 {
-    0% { transform: translate(0, 0) scale(0.9); border-radius: 50%; }
-    30% { transform: translate(28px, -28px) scale(1.1); border-radius: 40% 60% 70% 30% / 50% 30% 70% 50%; }
-    60% { transform: translate(0, 0) scale(0.95); border-radius: 50%; }
-    100% { transform: translate(-28px, 28px) scale(1.05); border-radius: 60% 40% 30% 70% / 60% 40% 60% 40%; }
+/* --- NEW BLOBS (Filling Gaps) --- */
+
+/* 4. Bottom-Right */
+.blob-4 {
+    width: 62px; height: 62px;
+    background: #EF3E63;
+    margin-top: -31px; margin-left: -31px;
+    animation: visible-fuse-4 1.5s infinite ease-in-out alternate;
+    animation-delay: -0.8s;
 }
 
-@keyframes jitter-2 {
-    0% { transform: translate(0, 0) scale(0.9); border-radius: 50%; }
-    30% { transform: translate(-30px, -25px) scale(1.15); border-radius: 70% 30% 50% 50% / 30% 50% 70% 50%; }
-    60% { transform: translate(0, 0) scale(0.95); border-radius: 50%; }
-    100% { transform: translate(25px, 30px) scale(1.05); border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%; }
+/* 5. Bottom-Left */
+.blob-5 {
+    width: 68px; height: 68px;
+    background: #EF3E63;
+    margin-top: -34px; margin-left: -34px;
+    animation: visible-fuse-5 1.7s infinite ease-in-out alternate;
+    animation-delay: -0.3s;
 }
 
-@keyframes jitter-3 {
-    0% { transform: translate(0, 0) scale(0.9); border-radius: 50%; }
-    30% { transform: translate(0, 32px) scale(1.1); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-    60% { transform: translate(0, 0) scale(0.95); border-radius: 50%; }
-    100% { transform: translate(0, -28px) scale(1.05); border-radius: 50% 50% 40% 60% / 60% 60% 40% 40%; }
+.blob-6 {
+    width: 58px; height: 58px;
+    background: #EF3E63;
+    margin-top: -29px; margin-left: -29px;
+    animation: visible-fuse-6 1.3s infinite ease-in-out alternate;
+    animation-delay: -0.6s;
 }
 
+/* Top-Right */
+@keyframes visible-fuse-1 {
+    0% { transform: translate(0, 0) scale(0.95); border-radius: 50%; }
+    100% {
+        transform: translate(20px, -20px) scale(1.05) rotate(45deg);
+        border-radius: 45% 55% 55% 45% / 55% 50% 50% 45%;
+    }
+}
+
+/* Top-Left */
+@keyframes visible-fuse-2 {
+    0% { transform: translate(0, 0) scale(0.95); border-radius: 50%; }
+    100% {
+        transform: translate(-20px, -10px) scale(1.1) rotate(-30deg);
+        border-radius: 55% 45% 50% 50% / 50% 55% 45% 50%;
+    }
+}
+
+/* Bottom (Straight Down) */
+@keyframes visible-fuse-3 {
+    0% { transform: translate(0, 0) scale(0.95); border-radius: 50%; }
+    100% {
+        transform: translate(0, 18px) scale(1.05) rotate(90deg);
+        border-radius: 50% 50% 45% 55% / 45% 45% 55% 55%;
+    }
+}
+
+/* Bottom-Right */
+@keyframes visible-fuse-4 {
+    0% { transform: translate(0, 0) scale(0.95); border-radius: 50%; }
+    100% {
+        transform: translate(20px, 18px) scale(1.1) rotate(60deg);
+        border-radius: 40% 60% 60% 40% / 50% 50% 50% 50%;
+    }
+}
+
+/* Bottom-Left */
+@keyframes visible-fuse-5 {
+    0% { transform: translate(0, 0) scale(0.95); border-radius: 50%; }
+    100% {
+        transform: translate(-20px, 20px) scale(1.05) rotate(-45deg);
+        border-radius: 60% 40% 50% 50% / 50% 60% 40% 50%;
+    }
+}
+
+/* Top (Straight Up) */
+@keyframes visible-fuse-6 {
+    0% { transform: translate(0, 0) scale(0.95); border-radius: 50%; }
+    100% {
+        transform: translate(0, -21px) scale(1.1) rotate(0deg);
+        border-radius: 55% 45% 55% 45% / 45% 55% 45% 55%;
+    }
+}
 /* ======================================================
    MOBILE MENU & TOGGLE
 ====================================================== */

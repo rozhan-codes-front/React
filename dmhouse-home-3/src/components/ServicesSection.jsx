@@ -165,7 +165,7 @@ export default function ServicesSection() {
 
     const scrollPerCard = 100;
     const numberOfMovingCards = SERVICES_DATA.length - 1;
-    const initialBuffer = 100;
+    const initialBuffer = 500;
     const totalHeight = `${(numberOfMovingCards * scrollPerCard) + initialBuffer + 100}vh`;
 
     return (

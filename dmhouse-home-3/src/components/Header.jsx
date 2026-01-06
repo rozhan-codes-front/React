@@ -125,6 +125,9 @@ export default function Header() {
                         <div className="preloader-blob blob-1"></div>
                         <div className="preloader-blob blob-2"></div>
                         <div className="preloader-blob blob-3"></div>
+                        <div className="preloader-blob blob-4"></div>
+                        <div className="preloader-blob blob-5"></div>
+                        <div className="preloader-blob blob-6"></div>
                     </div>
                     <img ref={preloaderLogoRef} src={brand.logoUrl} alt="Loading..." className="preloader-logo" style={{ willChange: 'transform' }} />
                 </div>
