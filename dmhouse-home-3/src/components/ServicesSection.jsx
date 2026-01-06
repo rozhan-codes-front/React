@@ -149,7 +149,7 @@ export default function ServicesSection() {
                         invalidateOnRefresh: true,
                     }
                 });
-                tl.to({}, { duration: 1 });
+                tl.to({}, { duration: 2.5 });
                 layers.forEach((layer, index) => {
                     if (index === 0) return;
                     tl.fromTo(layer,
