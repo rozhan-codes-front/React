@@ -852,58 +852,64 @@
 
 /* RESPONSIVE */
 @media (max-width: 992px) {
+    .site-header {
+        padding: 0 20px;
+    }
+
     .header-nav-desktop, .header-cta {
-        display: none;
+        display: none !important;
     }
 
     .mobile-toggle {
         display: flex;
+        margin-right: auto;
     }
 
     .header-glass {
         padding: 0 16px;
+        box-sizing: border-box;
+        grid-template-columns: auto 1fr;
+        gap: 0;
     }
 
-    /* Mobile Bottom Bar */
+    .header-brand {
+        grid-column: 1;
+        margin: 0;
+        justify-self: start;
+    }
+
+    .header-actions {
+        grid-column: 2;
+        justify-self: end;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
     .bottom-glass {
         padding: 6px 12px;
     }
-
     .bottom-logo {
         height: 24px;
     }
-
     .bottom-cta {
         padding: 8px 16px;
     }
-
     .bottom-cta span:first-child {
         display: none;
     }
-
-    /* Hide text, icon only */
     .bottom-sticky-wrapper {
         bottom: 20px;
         gap: 8px;
     }
-
-    /* Simplified Video Widget on Mobile */
-    .b-video-text {
+    .b-video-text, .b-video-play-btn {
         display: none;
     }
-
-    /* Hide text bubble */
-    .b-video-play-btn {
-        display: none;
-    }
-
     .b-video-circle {
         width: 48px;
         height: 48px;
         border-width: 2px;
     }
 }
-
 /* ======================================================
    SCROLL INDICATOR
 ====================================================== */

@@ -30,23 +30,25 @@ export default function Header() {
     const headerRef = useRef(null);
 
     // === ANIMATION SEQUENCE ===
+    // === ANIMATION SEQUENCE ===
     useLayoutEffect(() => {
         let xDiff = 0, yDiff = 0, scaleDiff = 1;
+
+        // Detect mobile state once at the start
+        const isMobile = window.innerWidth < 992;
+
         const ctx = gsap.context(() => {
             const tl = gsap.timeline({
                 onComplete: () => {
                     window.dispatchEvent(new CustomEvent('intro-complete'));
                     setIsLoaded(true);
                     gsap.set(preloaderRef.current, { display: 'none' });
-                    // Clean up styles to allow CSS responsiveness
                     gsap.set('.header-glass', { clearProps: 'all' });
-                    // Ensure nav/actions are visible to layout (opacity handled by CSS transition now)
                     gsap.set([navRef.current, actionsRef.current], { clearProps: 'display' });
                 }
             });
 
-            // 1. FORCE CIRCLE LAYOUT (Flexbox Center)
-            // We bypass the CSS Grid initially to guarantee the logo is dead center
+            // 1. FORCE CIRCLE LAYOUT
             gsap.set('.site-header', { y: 0, opacity: 1 });
             gsap.set('.header-glass', {
                 display: 'flex',
@@ -56,7 +58,7 @@ export default function Header() {
                 borderRadius: '50%',
             });
 
-            // Completely remove Nav and Actions from the DOM flow so they don't push the logo
+            // Hide Nav/Actions initially
             gsap.set([navRef.current, actionsRef.current], { display: 'none', autoAlpha: 0 });
             gsap.set(headerLogoRef.current, { autoAlpha: 0 });
             gsap.set('.scroll-indicator', { autoAlpha: 0, y: 20 });
@@ -65,7 +67,7 @@ export default function Header() {
             gsap.set('.preloader-ripple', { clipPath: "circle(0% at 50% 50%)" });
             gsap.set('.holographic-field', { scale: 1.5, rotation: 0 });
 
-            // 2. WAIT PHASE
+            // 2. WAIT
             tl.to({}, { duration: 2.0 });
 
             // 3. CALCULATION
@@ -73,7 +75,6 @@ export default function Header() {
                 if (preloaderLogoRef.current && headerLogoRef.current) {
                     const startRect = preloaderLogoRef.current.getBoundingClientRect();
                     const endRect = headerLogoRef.current.getBoundingClientRect();
-
                     xDiff = (endRect.left + endRect.width / 2) - (startRect.left + startRect.width / 2);
                     yDiff = (endRect.top + endRect.height / 2) - (startRect.top + startRect.height / 2);
                     scaleDiff = endRect.width / startRect.width;
@@ -85,40 +86,39 @@ export default function Header() {
             tl.to('.preloader-blob', { scale: 0, opacity: 0, x: 0, y: 0, duration: 0.4, ease: "back.in(2)", stagger: 0 }, "implode");
             tl.to(preloaderLogoRef.current, { scale: 0.85, duration: 0.3, ease: "power2.out" }, "implode");
 
-            // 5. EXPLODE & MOVE (Logo travels to center)
+            // 5. EXPLODE
             tl.addLabel("explode", ">");
             tl.to('.preloader-ripple', { clipPath: "circle(150% at 50% 50%)", duration: 1.6, ease: "power4.inOut" }, "explode");
             tl.to('.holographic-field', { scale: 1, duration: 1.6, ease: "power4.inOut" }, "explode");
             tl.to(preloaderLogoRef.current, { x: () => xDiff, y: () => yDiff, scale: () => scaleDiff, duration: 1.6, ease: "power4.inOut" }, "explode");
 
-            // 6. SWAP LOGOS (Seamless)
+            // 6. SWAP
             tl.add(() => {
                 gsap.set(headerLogoRef.current, { autoAlpha: 1 });
                 gsap.set(preloaderLogoRef.current, { autoAlpha: 0 });
                 gsap.fromTo(headerLogoRef.current, { scale: 0.9 }, { scale: 1, duration: 0.6, ease: "elastic.out(1, 0.5)" });
             });
-
-            // Fade Preloader (Background Only)
             tl.to(preloaderRef.current, { autoAlpha: 0, duration: 0.5 });
 
-            // 7. EXPAND HEADER (Delayed)
-            // We expand WIDTH while keeping it FLEX CENTER so logo stays in middle
+            // 7. EXPAND HEADER
+            // Fix: On mobile (RTL), align flex-start (Right) so logo moves with the edge smoothly
             tl.to('.header-glass', {
                 width: '100%',
                 borderRadius: '100px',
-                padding: '0 40px',
+                justifyContent: isMobile ? 'flex-start' : 'center',
+                padding: isMobile ? '0 16px' : '0 40px',
                 duration: 1.2,
                 ease: "expo.out"
             }, "+=0.2");
 
-            // 8. SWITCH TO GRID & REVEAL CONTENT
+            // 8. REVEAL CONTENT (Fix for Flash/Overflow)
             tl.add(() => {
-                // Now that it is full width, we switch to Grid to allow Nav/Actions to sit on sides
-                gsap.set('.header-glass', { display: 'grid' }); // Reverts to CSS class definition
-                gsap.set([navRef.current, actionsRef.current], { display: 'flex' }); // Restore display type
+                gsap.set('.header-glass', { display: 'grid' });
+                // Fix: Clear 'display' property so CSS takes over immediately.
+                // This prevents 'display: flex' from forcing the Desktop Nav to show on Mobile.
+                gsap.set([navRef.current, actionsRef.current], { clearProps: 'display' });
             });
 
-            // Animate Opacity/Y of content
             tl.to([navRef.current, actionsRef.current], {
                 autoAlpha: 1,
                 y: 0,
