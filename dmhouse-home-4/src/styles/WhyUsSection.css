@@ -1,0 +1,199 @@
+/* =========================
+   BASE & HEADER (Preserved)
+========================= */
+.why-us {
+    padding: 100px 0;
+    position: relative;
+    /* Ensure seamless background match with previous section if needed */
+    background-color: transparent;
+}
+
+/* Re-applying your header styles exactly as they were */
+.head {
+    width: 100%;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    /* Assuming standard alignment from your project */
+    align-items: flex-start;
+}
+
+.title-group {
+    margin-bottom: 16px;
+}
+
+.en-title {
+    display: block;
+    font-size: 14px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.head h2 {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 900;
+    color: #01024E;
+    margin: 0;
+}
+
+.head .highlight {
+    color: #4361ee; /* Or your brand color */
+}
+
+.subtitle {
+    font-size: 18px;
+    color: rgba(1,2,78,0.7);
+    max-width: 500px;
+}
+
+/* =========================
+   DESKTOP LAYOUT (Split)
+========================= */
+.why-us__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Important for sticky behavior */
+    position: relative;
+}
+
+/* --- THE LIST (Right side usually in RTL, Left in LTR) --- */
+/* Assuming RTL based on Persian text. If LTR, swap order in Flex or HTML */
+.why-us__list {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    /* Add padding to ensure scroll space */
+    padding-bottom: 10vh;
+}
+
+.why-us__item {
+    padding: 60px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    /* Subtle opacity for inactive items to focus attention */
+    opacity: 0.5;
+}
+
+.why-us__item.active {
+    opacity: 1;
+}
+
+/* Remove border from last item for cleaner look */
+.why-us__item:last-child {
+    border-bottom: none;
+}
+
+.why-us__item-head {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.why-us__index {
+    font-size: 16px;
+    font-weight: 700;
+    color: #4361ee;
+    margin-left: 16px; /* Space between index and title (RTL friendly) */
+    opacity: 0.6;
+}
+
+.why-us__title {
+    font-size: clamp(24px, 3vw, 36px);
+    font-weight: 800;
+    color: #01024E;
+    margin: 0;
+}
+
+.why-us__desc {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #555;
+    max-width: 90%;
+}
+
+.why-us__mobile-img {
+    display: none; /* Hidden on Desktop */
+}
+
+/* --- THE VISUAL (Sticky Image) --- */
+.why-us__visual {
+    width: 45%;
+    height: 60vh; /* Fixed height for the viewing area */
+    position: sticky;
+    top: 20vh; /* Center vertically in viewport */
+    border-radius: 132px 32px 32px 32px;
+    overflow: hidden;
+}
+
+.why-us__visual-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.why-us__bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transform: scale(1.1);
+    transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1),
+    transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: opacity, transform;
+}
+
+.why-us__bg-img.active {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 2;
+}
+
+/* =========================
+   MOBILE / TOUCH (Native Feel)
+========================= */
+@media (max-width: 992px) {
+    .why-us__content {
+        flex-direction: column;
+    }
+
+    .why-us__visual {
+        display: none; /* Hide the sticky desktop image */
+    }
+
+    .why-us__list {
+        width: 100%;
+        padding-bottom: 0;
+    }
+
+    .why-us__item {
+        opacity: 1; /* Always fully visible */
+        padding: 30px 0;
+        border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .why-us__mobile-img {
+        display: block;
+        width: 100%;
+        height: 240px;
+        margin-top: 20px;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+
+    .why-us__mobile-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .why-us__desc {
+        max-width: 100%;
+        font-size: 16px;
+    }
+}
