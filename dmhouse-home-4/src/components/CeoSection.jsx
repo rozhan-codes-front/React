@@ -67,7 +67,7 @@ export default function CeoSection() {
                 </div>
 
                 <div className="ceo-rolling-token">
-                    <img src="https://dmhouse.agency/wp-content/uploads/2025/12/dmhouse-logo.png" alt="DM Logo" />
+                    <img src="https://dmhouse.agency/wp-content/uploads/2026/01/dmhouselogo-10.svg" alt="DM Logo" />
                 </div>
             </div>
         </section>

@@ -82,7 +82,7 @@ export const SITE_DATA = {
 export const HEADER_DATA = {
     brand: {
         name: "DMHouse",
-        logoUrl: "https://dmhouse.agency/wp-content/uploads/2025/12/dmhouse-logo.png",
+        logoUrl: "https://dmhouse.agency/wp-content/uploads/2026/01/dmhouselogo-10.svg",
         homeLink: "/"
     },
     cta: {

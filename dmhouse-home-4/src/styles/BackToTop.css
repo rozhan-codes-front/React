@@ -73,7 +73,7 @@
 }
 
 .btt-fill-ring {
-    stroke: #EF3E63;
+    stroke: var(--primary);
     stroke-linecap: round;
     transition: none;
 }

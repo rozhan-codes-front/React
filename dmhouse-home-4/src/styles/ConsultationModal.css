@@ -119,7 +119,7 @@
     margin-top: 4px;
     padding: 12px;
     border-radius: 12px;
-    background: linear-gradient(135deg, #EF3E63 0%, #ff6b8b 100%);
+    background: linear-gradient(135deg, var(--primary) 0%, #ff5f82 100%);
     border: none;
     color: #fff;
     font-weight: 800;

@@ -1,6 +1,6 @@
 :root {
-    --primary: #EF3E63;
-    --primary-soft: #EF3E631A;
+    --primary: #ED1250;
+    --primary-soft: var(--primary)1A;
     --secondary: #101010;
     --text: #7A7A7A;
     --accent: #61CE70;
@@ -670,7 +670,7 @@ canvas.dm3d {
 
 .cursor.is-hover .cursor__inner {
     transform: scale(1.8);
-    border-color: #EF3E63;
+    border-color: var(--primary);
     background: transparent;
 }
 
@@ -681,7 +681,7 @@ canvas.dm3d {
 .cursor.is-video .cursor__inner {
     transform: scale(2.4);
     background: rgba(239, 62, 99, 0.18);
-    border-color: #EF3E63;
+    border-color: var(--primary);
     mix-blend-mode: normal;
 }
 
@@ -963,7 +963,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 6px;
-    border-right: 4px solid var(--primary, #EF3E63);
+    border-right: 4px solid var(--primary, var(--primary));
     padding-right: 24px;
 }
 
@@ -1190,7 +1190,7 @@ canvas.webgl {
     inset: -15%;
 
     /*background:*/
-    /*        radial-gradient(42% 38% at 20% 25%, #EF3E63 0%, transparent 55%),*/
+    /*        radial-gradient(42% 38% at 20% 25%, var(--primary) 0%, transparent 55%),*/
     /*        radial-gradient(38% 34% at 85% 22%, #2E2F7E 0%, transparent 58%),*/
     /*        radial-gradient(36% 36% at 78% 82%, #FF407D 0%, transparent 60%),*/
     /*        radial-gradient(34% 34% at 22% 78%, #61CE70 0%, transparent 60%);*/

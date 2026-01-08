@@ -37,24 +37,19 @@
 }
 
 .t-highlight {
-    color: #EF3E63;
+    color: var(--primary);
 }
 
-/* THE DISPLAY CARD */
 .t-display-card {
     position: relative;
     width: 100%;
     max-width: 700px;
     min-height: 400px;
     border-radius: 140px 40px 40px 0;
-
-    /* Flexbox to handle internal spacing */
     display: flex;
     flex-direction: column;
-
-    /* Padding adjusted for Desktop */
     padding: 56px;
-    padding-left: 180px; /* Space for bulging image on left */
+    padding-left: 180px;
 
     box-shadow: 0 30px 60px -10px rgba(0,0,0,0.1);
     border: 2px dashed rgba(255,255,255,0.5);
@@ -92,7 +87,7 @@
 }
 
 .t-author-block {
-    margin-top: auto; /* Pushes author to bottom of flex container */
+    margin-top: auto;
     display: flex;
     flex-direction: column;
     gap: 4px;
