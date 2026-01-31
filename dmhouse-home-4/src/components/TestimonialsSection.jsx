@@ -102,7 +102,9 @@ export default function TestimonialsSection() {
                 {/* STAGE COL */}
                 <div className="t-stage-col">
                     <div className="t-stage-header">
-                        <h2 className="t-title">مشتریان ما <br /> <span className="t-highlight">چه می‌گویند؟</span></h2>
+                        <h2 className="t-title">
+                            مشتریان <span className="t-highlight">ما</span> <br /> چه می‌گویند؟
+                        </h2>
                     </div>
 
                     <div
