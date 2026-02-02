@@ -102,7 +102,7 @@ export default function Header() {
 
             // 7. EXPAND HEADER
             // Fix: On mobile (RTL), align flex-start (Right) so logo moves with the edge smoothly
-            tl.to('.header-glass', {
+            tl.to('.header-gla ss', {
                 width: '100%',
                 borderRadius: '100px',
                 justifyContent: isMobile ? 'flex-start' : 'center',

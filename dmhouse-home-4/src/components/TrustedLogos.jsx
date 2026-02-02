@@ -10,15 +10,12 @@ const RAW_LOGOS = [
     "https://dmhouse.agency/wp-content/uploads/2023/05/%D8%A7%D8%B1%D8%B4%D8%AF-%D9%BE%DB%8C.jpg"
 ];
 
-// 2. Create a "Batch" large enough to loop smoothly
-// We repeat it more times to ensure screens with high resolution don't see gaps
 const LOGO_BATCH = [...RAW_LOGOS, ...RAW_LOGOS, ...RAW_LOGOS, ...RAW_LOGOS, ...RAW_LOGOS, ...RAW_LOGOS];
 
 export default function TrustedLogos() {
 
     return (
         <section className="trustedLogos">
-            {/* Standard Header (kept consistent) */}
             <header className="head">
                 <div className="title-group">
                     <span className="en-title">Our Partners</span>
